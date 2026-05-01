@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Prático: Criando seu Primeiro Agente de IA</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Guia prático em 7 etapas (do 0 ao 6) para criar seu primeiro agente de IA partindo de uma dor real, com exemplos para Engenharia, Arquitetura, Medicina, Varejo, Administrativo e Educação.">
+    <meta name="author" content="Guia de Agentes de IA">
+    <meta name="theme-color" content="#4338ca">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Guia Prático: Criando seu Primeiro Agente de IA">
+    <meta property="og:description" content="Do zero ao seu primeiro agente: método 'Aprender Fazendo' em 7 etapas, com exemplos reais por área.">
+    <meta property="og:locale" content="pt_BR">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Guia Prático: Criando seu Primeiro Agente de IA">
+    <meta name="twitter:description" content="Do zero ao seu primeiro agente: método 'Aprender Fazendo' em 7 etapas.">
+
+    <!-- Favicon (emoji robô via SVG inline) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
+
+    <!-- Tailwind CDN (apropriado para guia educacional; em produção real, prefira build compilado) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = { darkMode: 'class' };
+    </script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .step-card { transition: all 0.3s ease; }
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+        }
+        .workflow-arrow { color: #94a3b8; }
+        .highlight-box { background: linear-gradient(135deg, #f0f4ff 0%, #e0e7ff 100%); }
+        .dark .highlight-box { background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%); }
+        .prose-custom p { margin-bottom: 1rem; color: #475569; }
+        .dark .prose-custom p { color: #cbd5e1; }
+        .prompt-example {
+            background-color: #f1f5f9;
+            border-left: 4px solid #6366f1;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #334155;
+            position: relative;
+        }
+        .dark .prompt-example { background-color: #1e293b; color: #cbd5e1; }
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: rgba(99,102,241,0.15);
+            border: 1px solid rgba(99,102,241,0.3);
+            color: #4338ca;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.25rem 0.6rem;
+            border-radius: 0.4rem;
+            cursor: pointer;
+            font-style: normal;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { background: rgba(99,102,241,0.3); }
+        .dark .copy-btn { background: rgba(99,102,241,0.2); color: #c7d2fe; border-color: rgba(165,180,252,0.4); }
+        .copy-btn.copied { background: #16a34a; color: white; border-color: #16a34a; }
+
+        /* TOC */
+        .toc-link.active {
+            background-color: #eef2ff;
+            color: #4338ca;
+            font-weight: 600;
+        }
+        .dark .toc-link.active { background-color: #312e81; color: #c7d2fe; }
+
+        /* Back to top */
+        #backToTop {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+        #backToTop.visible { opacity: 1; pointer-events: auto; }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 leading-relaxed transition-colors">
+
+    <!-- Top toolbar (Dark mode + TOC mobile) -->
+    <div class="fixed top-4 right-4 z-50 flex gap-2">
+        <button id="tocToggleMobile" class="md:hidden bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" aria-label="Abrir índice">
+            <i class="fas fa-list" aria-hidden="true"></i>
+        </button>
+        <button id="darkToggle" class="bg-white dark:bg-slate-800 text-indigo-700 dark:text-yellow-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" aria-label="Alternar modo escuro">
+            <i class="fas fa-moon dark:hidden" aria-hidden="true"></i>
+            <i class="fas fa-sun hidden dark:inline" aria-hidden="true"></i>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="bg-indigo-700 dark:bg-indigo-900 text-white py-20 px-6 text-center shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">Guia Prático: Criando seu Primeiro Agente de IA</h1>
+            <p class="text-xl md:text-2xl text-indigo-50 font-light">Transforme dores do dia a dia em soluções inteligentes através do método <strong>"Aprender Fazendo"</strong>.</p>
+            <div class="mt-10 inline-block bg-white text-indigo-700 px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl">
+                Um guia do 0 ao 6 — comece do zero!
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout: Sidebar TOC + Main -->
+    <div class="max-w-7xl mx-auto px-6 py-16 md:flex md:gap-10">
+
+        <!-- TOC Sidebar -->
+        <aside id="toc" class="hidden md:block md:w-64 shrink-0">
+            <nav class="sticky top-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3">Índice</p>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#passo-0" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">0. A Dor Real</a></li>
+                    <li><a href="#vocabulario" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Vocabulário</a></li>
+                    <li><a href="#mapa" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Mapa da Jornada</a></li>
+                    <li><a href="#exemplo" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Exemplo fim-a-fim</a></li>
+                    <li><a href="#passo-1" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">1. Imersão</a></li>
+                    <li><a href="#passo-2" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">2. Planejamento</a></li>
+                    <li><a href="#passo-3" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">3. Pesquisa</a></li>
+                    <li><a href="#passo-4" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">4. O Cérebro</a></li>
+                    <li><a href="#passo-5" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">5. Especificação</a></li>
+                    <li><a href="#passo-6" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">6. Nascimento</a></li>
+                    <li><a href="#regras" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Regras de Ouro</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Mobile TOC drawer -->
+        <div id="tocMobile" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden" role="dialog" aria-modal="true">
+            <nav class="absolute right-0 top-0 h-full w-72 bg-white dark:bg-slate-800 p-6 shadow-2xl overflow-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider">Índice</p>
+                    <button id="tocCloseMobile" aria-label="Fechar índice" class="text-slate-500 dark:text-slate-300"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#passo-0" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">0. A Dor Real</a></li>
+                    <li><a href="#vocabulario" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Vocabulário</a></li>
+                    <li><a href="#mapa" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Mapa da Jornada</a></li>
+                    <li><a href="#exemplo" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Exemplo fim-a-fim</a></li>
+                    <li><a href="#passo-1" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">1. Imersão</a></li>
+                    <li><a href="#passo-2" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">2. Planejamento</a></li>
+                    <li><a href="#passo-3" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">3. Pesquisa</a></li>
+                    <li><a href="#passo-4" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">4. O Cérebro</a></li>
+                    <li><a href="#passo-5" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">5. Especificação</a></li>
+                    <li><a href="#passo-6" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">6. Nascimento</a></li>
+                    <li><a href="#regras" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700">Regras de Ouro</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main class="flex-1 min-w-0">
+
+        <!-- Intro & Problem Section -->
+        <section id="passo-0" class="mb-20 scroll-mt-8">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-indigo-100 dark:bg-indigo-900 p-4 rounded-2xl text-indigo-600 dark:text-indigo-300 shadow-sm">
+                    <i class="fas fa-rocket text-3xl" aria-hidden="true"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white">0. O Ponto de Partida: A Dor Real</h2>
+            </div>
+
+            <div class="prose-custom max-w-none text-lg mb-8">
+                <p>Ninguém constrói um agente de IA apenas pela tecnologia. Construímos porque algo dói, porque um problema precisa ser resolvido, porque tarefas repetitivas exigem um trabalho que muitas vezes não agrega valor intelectual à pessoa — uma tarefa que demora demais, um relatório que ninguém aguenta ler ou um processo que trava porque depende de memória humana.</p>
+                <p>Antes de abrir qualquer ferramenta, faça três perguntas-chave para validar se vale a pena construir o agente:</p>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-4 mb-10">
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">Pergunta 1</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1">Qual é a dor?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Descreva o problema em uma frase. Se não conseguir, ainda não está claro.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">Pergunta 2</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1">Quem sente essa dor?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Você, sua equipe, seus clientes? Saber o usuário define o tom e os critérios.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2">Pergunta 3</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1">Quanto custa hoje?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Em horas, dinheiro ou erros. Essa é a sua linha de base para medir ganho.</p>
+                </div>
+            </div>
+
+            <div class="prose-custom max-w-none text-lg mb-10">
+                <p>Pense no seu agente como um <strong>"Estagiário Digital"</strong>. O que ele faria se pudesse trabalhar 24h por dia sem cansar? Veja exemplos de problemas reais por área que você pode começar a resolver hoje:</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Case Engineering -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-blue-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-hard-hat text-blue-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Engenharia</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Garantir que projetos sigam centenas de páginas de normas da ABNT e manuais de segurança.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-blue-50 dark:bg-blue-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Auditor de Conformidade que cruza dados da obra com as normas e aponta erros na hora.</p>
+                </div>
+                <!-- Case Architecture -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-teal-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-drafting-compass text-teal-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Arquitetura</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Redigir memoriais descritivos consome horas a partir de pranchas e listas de especificação.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-teal-50 dark:bg-teal-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Redator Técnico que gera memoriais descritivos automaticamente seguindo a NBR 13532 e o padrão do escritório.</p>
+                </div>
+                <!-- Case Medicine -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-rose-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-stethoscope text-rose-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Medicina</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Revisar prontuários longos antes da consulta toma tempo precioso do médico.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-rose-50 dark:bg-rose-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Resumidor Clínico que estrutura histórico do paciente em formato SOAP, respeitando LGPD/CFM e com revisão humana obrigatória.</p>
+                </div>
+                <!-- Case Retail -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-green-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-shopping-cart text-green-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Pequeno Varejo</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Horas perdidas respondendo dúvidas idênticas no WhatsApp sobre tamanhos, trocas e frete.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-green-50 dark:bg-green-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Especialista em Atendimento que conhece todo o estoque e a política da loja de cor.</p>
+                </div>
+                <!-- Case Admin -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-purple-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-file-invoice text-purple-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Administrativo</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Caos na gestão de notas e contratos, com vencimentos perdidos em pastas bagunçadas.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-purple-50 dark:bg-purple-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Organizador de Fluxo que extrai datas e valores automaticamente para um cronograma.</p>
+                </div>
+                <!-- Case Education -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-orange-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-graduation-cap text-orange-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white">Educação</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3"><strong>O Problema:</strong> Ter muito conteúdo gravado ou escrito, mas não ter tempo para criar provas e exercícios.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-orange-50 dark:bg-orange-950/40 p-3 rounded-lg font-medium"><strong>O Agente:</strong> Designer Instrucional que transforma aulas em materiais didáticos estruturados.</p>
+                </div>
+            </div>
+
+            <!-- Checklist -->
+            <div class="mt-10 bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl shadow-sm">
+                <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir para o Passo 1</p>
+                <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                    <li>Você consegue descrever a dor em <strong>uma única frase</strong>.</li>
+                    <li>Você sabe <strong>quem sente</strong> a dor (usuário do agente).</li>
+                    <li>Você tem uma estimativa do <strong>custo atual</strong> (horas/dinheiro/erros).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Vocabulário do Agente -->
+        <section id="vocabulario" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8">Vocabulário do Agente</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Skill</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Habilidade que o agente sabe fazer (ex.: "redigir memorial descritivo").</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Tool</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Ferramenta externa que o agente pode usar (ex.: planilha, API, busca na web).</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Hook</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Gatilho que dispara uma ação (ex.: "ao receber arquivo, extrair dados").</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Spec</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Especificação — contrato em linguagem natural do que o agente deve fazer.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">.md (Markdown)</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Formato de texto puro com formatação simples — o "idioma preferido" das IAs.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1">Prompt</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400">Instrução escrita que você envia para a IA orientando a resposta.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Workflow Section -->
+        <section id="mapa" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-12">O Mapa da Jornada</h2>
+            <div class="bg-indigo-50 dark:bg-slate-800 p-10 rounded-3xl border border-indigo-100 dark:border-slate-700 shadow-inner">
+
+                <!-- Desktop Workflow -->
+                <div class="hidden md:block">
+                    <div class="flex justify-between items-start">
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-slate-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">0</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Dor Real</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Ponto de partida</p>
+                        </div>
+                        <div class="mt-6 workflow-arrow text-2xl"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">1</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Imersão</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Diagnóstico do processo</p>
+                        </div>
+                        <div class="mt-6 workflow-arrow text-2xl"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">2</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Planejamento</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Design com Gemini</p>
+                        </div>
+                        <div class="mt-6 workflow-arrow text-2xl"><i class="fas fa-arrow-right" aria-hidden="true"></i></div>
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">3</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Pesquisa</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Deep Research</p>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end pr-[10%] my-6">
+                        <div class="workflow-arrow text-3xl"><i class="fas fa-arrow-down" aria-hidden="true"></i></div>
+                    </div>
+
+                    <div class="flex flex-row-reverse justify-between items-start">
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">4</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">O Cérebro</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Aprendizado em .md</p>
+                        </div>
+                        <div class="mt-6 workflow-arrow text-2xl"><i class="fas fa-arrow-left" aria-hidden="true"></i></div>
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">5</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Especificação</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">O "Contrato" do Agente</p>
+                        </div>
+                        <div class="mt-6 workflow-arrow text-2xl"><i class="fas fa-arrow-left" aria-hidden="true"></i></div>
+                        <div class="flex-1 text-center px-2">
+                            <div class="w-14 h-14 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 font-bold text-xl shadow-lg">6</div>
+                            <p class="font-bold text-slate-800 dark:text-slate-200">Nascimento</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-2">Execução Final</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mobile Workflow -->
+                <div class="md:hidden flex flex-col items-center gap-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-slate-500 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">0</div>
+                        <p class="font-bold dark:text-slate-200">Dor Real</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">1</div>
+                        <p class="font-bold dark:text-slate-200">Imersão</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">2</div>
+                        <p class="font-bold dark:text-slate-200">Planejamento</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">3</div>
+                        <p class="font-bold dark:text-slate-200">Pesquisa</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">4</div>
+                        <p class="font-bold dark:text-slate-200">O Cérebro</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-indigo-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">5</div>
+                        <p class="font-bold dark:text-slate-200">Especificação</p>
+                    </div>
+                    <i class="fas fa-arrow-down text-indigo-300 text-xl" aria-hidden="true"></i>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto font-bold shadow-lg mb-2">6</div>
+                        <p class="font-bold dark:text-slate-200">Nascimento</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exemplo fim-a-fim (Varejo) -->
+        <section id="exemplo" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8">Exemplo Fim-a-Fim — Pequeno Varejo</h2>
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <p class="text-slate-700 dark:text-slate-300 mb-6">Imagine uma loja de roupas que recebe dezenas de mensagens por dia no WhatsApp. Veja a saída esperada de cada passo aplicada a esse caso real:</p>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-slate-500 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">0</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Dor</p><p class="text-sm text-slate-600 dark:text-slate-400">"Perco 2h/dia respondendo dúvidas repetidas no WhatsApp e ainda assim cliente reclama de demora."</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">1</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Imersão</p><p class="text-sm text-slate-600 dark:text-slate-400">Lista das 20 dúvidas mais frequentes (tamanhos, frete, troca, formas de pagamento) e o tempo médio de resposta atual.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">2</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Planejamento</p><p class="text-sm text-slate-600 dark:text-slate-400">Skills: consultar tabela de medidas, calcular frete por CEP, explicar política de troca. Tools: planilha de estoque. Hooks: nova mensagem no WhatsApp.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">3</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Pesquisa</p><p class="text-sm text-slate-600 dark:text-slate-400">Relatório com boas práticas de atendimento em e-commerce de moda + checklist do CDC para trocas.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">4</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">O Cérebro</p><p class="text-sm text-slate-600 dark:text-slate-400">Pasta com: <code>politica-trocas.md</code>, <code>tabela-medidas.md</code>, <code>faq.md</code>, <code>tom-de-voz.md</code>.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">5</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Especificação</p><p class="text-sm text-slate-600 dark:text-slate-400">Spec descrevendo: persona, tom amigável, sempre confirmar tamanho antes do envio, escalar para humano se cliente pedir desconto.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-green-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">6</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white">Nascimento</p><p class="text-sm text-slate-600 dark:text-slate-400">Agente em produção respondendo 80% das dúvidas em segundos, com transcrições revisadas semanalmente para refinar o Cérebro.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Steps -->
+        <section class="space-y-16">
+
+            <!-- Step 1 -->
+            <div id="passo-1" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">1</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Imersão e Diagnóstico</h3>
+                        <p>O primeiro passo é entender o <strong>"chão de fábrica"</strong>. Você não pode ensinar a IA a fazer algo que você mesmo não entende como é feito manualmente.</p>
+                        <p>Analise o processo atual: Onde estão os gargalos? Quais regras você segue? Quais tarefas são repetitivas e não impulsionam seu aprendizado? Em seguida, liste as ferramentas que você usa (planilhas, e-mails, sites específicos).</p>
+
+                        <p class="bg-indigo-50 dark:bg-slate-700 p-5 rounded-xl text-indigo-900 dark:text-indigo-200 font-medium border-l-4 border-indigo-500 shadow-sm italic">
+                            Pensar e anotar tudo isso também é um bom começo para refletir sobre o seu processo e o que pode ser melhorado nele.
+                        </p>
+
+                        <div class="bg-indigo-50 dark:bg-slate-900/60 p-8 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-8">
+                            <h4 class="font-bold text-indigo-900 dark:text-indigo-200 mb-4 flex items-center gap-2">
+                                <i class="fas fa-search" aria-hidden="true"></i> Dica de Especialista: Investigue o Problema com Deep Research
+                            </h4>
+                            <p class="text-sm text-indigo-800 dark:text-indigo-300 mb-4">Muitas vezes, nós sabemos que temos um problema, mas não conhecemos as <strong>melhores práticas</strong> do mercado para resolvê-lo. Use o <strong>Gemini Deep Research</strong> agora mesmo para aprender sobre o domínio antes de planejar o agente.</p>
+
+                            <p class="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase mb-3">Exemplos de Prompts para começar:</p>
+
+                            <div class="space-y-4">
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Engenharia:</strong> "Investigue as principais causas de não conformidade em obras civis e quais normas da ABNT são mais críticas para garantir a segurança estrutural e do trabalho."
+                                </div>
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Arquitetura:</strong> "Pesquise a estrutura padrão de um memorial descritivo de projeto arquitetônico segundo a NBR 13532, identificando seções obrigatórias, vocabulário técnico e erros comuns na redação."
+                                </div>
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Medicina:</strong> "Investigue as melhores práticas para resumo de prontuários eletrônicos no formato SOAP, considerando exigências da LGPD e do CFM sobre privacidade do paciente e responsabilidade médica."
+                                </div>
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Varejo:</strong> "Pesquise as melhores práticas de atendimento ao cliente para e-commerce e identifique quais são as 20 dúvidas mais frequentes de consumidores que compram vestuário online."
+                                </div>
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Administrativo:</strong> "Analise fluxos de trabalho de contas a pagar e receber em pequenas empresas e identifique os erros humanos mais comuns no processamento de notas fiscais e contratos."
+                                </div>
+                                <div class="prompt-example">
+                                    <button class="copy-btn" type="button">Copiar</button>
+                                    <strong>Para Educação:</strong> "Pesquise metodologias de design instrucional eficazes para converter roteiros de videoaulas em materiais didáticos de apoio que aumentem a retenção de alunos."
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-400 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0">💡 Regra do Mestre:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2">É vital que você entenda o básico do domínio. Se você não souber o que o agente deve entregar, não terá critério para saber se ele está funcionando ou apenas "alucinando" (inventando coisas com confiança).</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Mapa do processo manual atual escrito.</li>
+                                <li>Pelo menos um relatório de Deep Research lido e anotado.</li>
+                                <li>Lista de ferramentas/sistemas envolvidos.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="passo-2" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">2</span>
+                    </div>
+                    <div class="prose-custom max-w-none w-full">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Planejamento (O Arquiteto)</h3>
+                        <p>Com o diagnóstico feito, você não vai pedir para a IA criar o agente direto. Primeiro, você vai conversar com ela e pedir para que ela te ajude a criar a <strong>arquitetura/estrutura</strong> que será usada na construção do seu agente.</p>
+                        <p>No <strong>Gemini</strong> (ou alternativas como <strong>ChatGPT</strong> e <strong>Claude</strong>), cole o que você aprendeu no Passo 1 e peça ajuda para planejar a estrutura. Planejar é melhor do que executar logo, pois permite que você visualize a lista dos seus <strong>trabalhadores virtuais</strong> e as <strong>habilidades</strong> que eles precisam ter antes de gastar energia na construção.</p>
+                        <div class="bg-slate-900 dark:bg-slate-950 text-slate-300 p-6 rounded-2xl font-mono text-sm mt-6 shadow-inner border border-slate-800 relative">
+                            <button class="copy-btn" type="button">Copiar</button>
+                            <p class="text-indigo-400 mb-2 font-bold uppercase tracking-widest text-xs">// COMANDO RECOMENDADO:</p>
+                            "Com o domínio que descrevi acima, me ajude a planejar um conjunto de agentes. Para cada um, liste as <strong>Skills</strong> (habilidades), <strong>Tools</strong> (ferramentas) e <strong>Hooks</strong> (gatilhos de ação) necessários."
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Lista de Skills, Tools e Hooks definida.</li>
+                                <li>Você consegue explicar em voz alta o que cada agente faz.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="passo-3" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">3</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">Pesquisa de Dados (Deep Research)</h3>
+                        <p>Um agente só é inteligente se tiver <strong>munição técnica</strong>. Aqui, a pesquisa não é superficial: é sobre investigar o tema a fundo para coletar manuais, leis e padrões reais que regem o seu trabalho.</p>
+
+                        <div class="highlight-box p-8 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-6">
+                            <h4 class="font-bold text-indigo-900 dark:text-indigo-200 mb-4 flex items-center gap-2">
+                                <i class="fas fa-microscope" aria-hidden="true"></i> Como usar o Gemini Deep Research:
+                            </h4>
+                            <p class="text-sm text-indigo-800 dark:text-indigo-300 mb-4">O Gemini Deep Research funciona como um investigador particular que passa minutos varrendo a web para entregar um relatório denso.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">1</span>
+                                    <span>Acesse o <a href="https://gemini.google.com" target="_blank" rel="noopener" class="underline font-bold">Gemini</a> e procure pelo recurso <strong>"Deep Research"</strong> na barra de chat.</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">2</span>
+                                    <span>Defina o tema baseado no que o Gemini planejou no Passo 2 (ex: "Investigue todas as normas de segurança NR-18 para obras civis").</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">3</span>
+                                    <span>Baixe ou copie o relatório final. Ele será a base do conhecimento do seu agente.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-400 p-6 rounded-r-xl mt-8 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0">🚨 Atenção:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2">É muito importante ler todos os relatórios gerados com Deep Research. Pense que esse conhecimento não serve apenas para alimentar a IA — essa é uma ótima oportunidade para você aprender mais e se atualizar sobre o assunto.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Relatórios baixados/copiados em local conhecido.</li>
+                                <li>Você leu integralmente cada relatório e marcou pontos importantes.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div id="passo-4" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">4</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">O Cérebro: Conhecimento que Define a Atuação</h3>
+                        <p>Imagine que a IA é um aluno brilhante, mas que nunca entrou na sua empresa. O <strong>"Cérebro"</strong> é a apostila de estudos personalizada que você dá para ela.</p>
+                        <p>Diferente da IA genérica, o seu agente terá uma <strong>esponja</strong> que absorve apenas o conhecimento focado nos seus dados. É esse conhecimento que <strong>define como o agente atua</strong>: ele responde no seu tom de voz, segue as suas regras e cita as suas fontes. Sem o cérebro (arquivos .md), o agente dará respostas vagas. Com ele, age como um sênior da sua equipe.</p>
+
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-slate-800 dark:text-white mb-2 flex items-center gap-2"><i class="fas fa-brain text-indigo-500" aria-hidden="true"></i> O que é?</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">É o <strong>conhecimento inicial</strong> do seu agente. Define o domínio dele e exatamente como deve atuar.</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-slate-800 dark:text-white mb-2 flex items-center gap-2"><i class="fas fa-broom text-indigo-500" aria-hidden="true"></i> Por que Markdown (.md)?</h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed">Arquivos .md são "texto puro" formatado. É o idioma preferido das IAs, pois não tem a "sujeira" visual dos PDFs ou Word.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-indigo-50 dark:bg-slate-900/60 p-6 rounded-2xl">
+                            <p class="font-bold text-indigo-900 dark:text-indigo-200 mb-2 text-sm uppercase tracking-wider">Como preparar o Cérebro:</p>
+                            <ol class="list-decimal ml-6 space-y-2 text-indigo-800 dark:text-indigo-300 text-sm">
+                                <li>Crie uma pasta no seu computador com o nome do projeto.</li>
+                                <li>Abra seus relatórios de pesquisa no Google Docs e baixe cada um como <strong>"Texto Formatado (.md)"</strong>.</li>
+                                <li>Coloque todos esses arquivos dentro da pasta. Pronto, o cérebro está alimentado!</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Pasta do projeto criada com arquivos .md organizados.</li>
+                                <li>Nenhum dado sensível incluído sem revisão.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div id="passo-5" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">5</span>
+                    </div>
+                    <div class="prose-custom max-w-none w-full">
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6">A Especificação (O Contrato)</h3>
+                        <p>Agora usamos o <a href="https://claude.ai" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Claude</a>, o <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">GitHub Copilot</a> ou alternativas como <a href="https://cursor.sh" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Cursor</a> e <a href="https://chatgpt.com" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">ChatGPT</a> (apontando para a pasta que você criou no Passo 4). Pedimos para a IA ler o "Cérebro" e criar um <strong>contrato de desenvolvimento</strong>.</p>
+                        <p>A especificação (Spec) é o documento onde a IA descreve exatamente o que ela pretende construir. É o momento de você ler e dizer: "Sim, é exatamente isso" ou "Não, essa regra está errada".</p>
+                        <div class="bg-slate-900 dark:bg-slate-950 text-slate-300 p-6 rounded-2xl font-mono text-sm mt-6 border border-slate-800 relative">
+                            <button class="copy-btn" type="button">Copiar</button>
+                            <p class="text-indigo-400 mb-2 font-bold uppercase tracking-widest text-xs">// COMANDO PARA O CLAUDE/COPILOT:</p>
+                            "Leia os arquivos desta pasta e use os conceitos de <strong>Spec-driven development</strong> (desenvolvimento guiado por especificação) para criar uma especificação detalhada do agente em linguagem natural."
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-400 p-6 rounded-r-xl mt-8 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0">🚨 Atenção:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2">Leia tudo! É aqui que você evita as alucinações. Uma Spec bem validada garante um agente mais preciso. Converse com o seu agente ou faça edições manuais no texto até que tudo esteja como deve ser.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Antes de seguir</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Spec lida do início ao fim.</li>
+                                <li>Regras de negócio e tom de voz validados por você.</li>
+                                <li>Casos de borda discutidos (o que fazer quando o agente não souber).</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div id="passo-6" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-green-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">6</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-3xl font-bold text-green-700 dark:text-green-400 mb-6">Nascimento e Execução</h3>
+                        <p>Com o contrato (Spec) aprovado por você, o trabalho difícil acabou. Agora você apenas dá a ordem para a IA "girar a chave".</p>
+                        <p>Diga para a IA: <strong>"A especificação está perfeita. Agora, execute o desenvolvimento do agente conforme planejado."</strong></p>
+                        <p>A IA criará todos os arquivos, códigos e instruções de sistema necessários. Seu primeiro agente de IA profissional acaba de nascer, pronto para resolver aquela dor que você identificou lá no início.</p>
+
+                        <div class="mt-6 bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                            <p class="font-bold text-slate-900 dark:text-white mb-3">O que esperar como saída:</p>
+                            <ul class="list-disc ml-6 space-y-1 text-sm text-slate-600 dark:text-slate-400">
+                                <li>Arquivos de configuração e instruções de sistema (system prompt).</li>
+                                <li>Estrutura de pastas com o "Cérebro" pronto para uso.</li>
+                                <li>Exemplos de uso e casos de teste sugeridos.</li>
+                                <li>Instruções de como integrar com a ferramenta escolhida (WhatsApp, e-mail, planilha, etc.).</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-400 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0">🔄 Lembre-se:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2">O agente nasce, mas precisa ser testado e refinado. Trate cada uso como um ciclo: <strong>testar → ajustar a Spec → re-executar</strong>. E atenção à <strong>privacidade dos dados</strong> que você coloca no "Cérebro" — evite expor informações sensíveis (contratos, dados pessoais, segredos comerciais) sem antes verificar a política da ferramenta utilizada.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-emerald-500 p-6 rounded-r-xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2">✅ Você concluiu o guia</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li>Agente em funcionamento básico.</li>
+                                <li>Plano de revisão definido (semanal ou mensal).</li>
+                                <li>Próximo passo: medir o ganho contra a linha de base do Passo 0.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Golden Rules Footer -->
+        <footer id="regras" class="mt-32 p-12 bg-indigo-950 text-indigo-100 rounded-[3rem] shadow-2xl overflow-hidden relative scroll-mt-8">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-900 rounded-full -mr-32 -mt-32 opacity-50" aria-hidden="true"></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl font-bold text-white mb-12 text-center">As 4 Regras de Ouro do Sucesso</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <div class="text-center">
+                        <div class="bg-indigo-600/30 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl text-white shadow-lg border border-indigo-500/30">
+                            <i class="fas fa-user-shield" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white mb-3">Controle Humano</h3>
+                        <p class="text-sm opacity-90 leading-relaxed">A IA é sua assistente, não sua substituta. Leia a Spec e valide o conhecimento. O chefe é você.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-indigo-600/30 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl text-white shadow-lg border border-indigo-500/30">
+                            <i class="fas fa-folder-open" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white mb-3">Organização é Tudo</h3>
+                        <p class="text-sm opacity-90 leading-relaxed">Uma pasta organizada com .md limpos vale mais que mil prompts genéricos. Cérebro confuso = agente confuso.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-indigo-600/30 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl text-white shadow-lg border border-indigo-500/30">
+                            <i class="fas fa-vial" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white mb-3">Experimentação</h3>
+                        <p class="text-sm opacity-90 leading-relaxed">Não se assuste se não ficar perfeito de primeira. Refine a conversa, peça ajustes na Spec e tente de novo.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-indigo-600/30 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6 text-3xl text-white shadow-lg border border-indigo-500/30">
+                            <i class="fas fa-rotate" aria-hidden="true"></i>
+                        </div>
+                        <h3 class="font-bold text-xl text-white mb-3">Iteração e Teste</h3>
+                        <p class="text-sm opacity-90 leading-relaxed">Agente bom é agente testado. Estabeleça um ciclo regular de revisão e melhoria contínua.</p>
+                    </div>
+                </div>
+                <div class="mt-16 text-center pt-10 border-t border-indigo-900">
+                    <p class="text-sm opacity-70">© 2026 Guia de Agentes de IA — Construído para humanos, potencializado por IA.</p>
+                </div>
+            </div>
+        </footer>
+
+        </main>
+    </div>
+
+    <!-- Back to top -->
+    <button id="backToTop" class="fixed bottom-6 right-6 z-40 bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center" aria-label="Voltar ao topo">
+        <i class="fas fa-arrow-up" aria-hidden="true"></i>
+    </button>
+
+    <script>
+        // Dark mode
+        (function() {
+            const root = document.documentElement;
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) root.classList.add('dark');
+            document.getElementById('darkToggle').addEventListener('click', () => {
+                root.classList.toggle('dark');
+                localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
+            });
+        })();
+
+        // Copy buttons
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const parent = btn.parentElement;
+                const clone = parent.cloneNode(true);
+                clone.querySelectorAll('.copy-btn').forEach(b => b.remove());
+                const text = clone.innerText.trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    const original = btn.textContent;
+                    btn.textContent = 'Copiado!';
+                    btn.classList.add('copied');
+                    setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
+                });
+            });
+        });
+
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) backToTop.classList.add('visible');
+            else backToTop.classList.remove('visible');
+        });
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // TOC active link
+        const tocLinks = document.querySelectorAll('.toc-link');
+        const sections = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+                }
+            });
+        }, { rootMargin: '-30% 0px -60% 0px' });
+        sections.forEach(s => observer.observe(s));
+
+        // Mobile TOC
+        const tocMobile = document.getElementById('tocMobile');
+        document.getElementById('tocToggleMobile').addEventListener('click', () => tocMobile.classList.remove('hidden'));
+        document.getElementById('tocCloseMobile').addEventListener('click', () => tocMobile.classList.add('hidden'));
+        tocMobile.addEventListener('click', e => { if (e.target === tocMobile) tocMobile.classList.add('hidden'); });
+        tocMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => tocMobile.classList.add('hidden')));
+    </script>
+
+</body>
+</html>

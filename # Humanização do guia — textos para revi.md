@@ -14,8 +14,8 @@
 - **Depois:** Seu primeiro agente de IA, sem mistério
 
 ### Subtítulo
-- **Antes:** Transforme dores do dia a dia em soluções inteligentes através do método "Aprender Fazendo".
-- **Depois:** Você não precisa ser de TI. Só precisa de um problema chato do seu dia a dia — a gente te mostra o resto, **aprendendo fazendo**.
+- **Antes:** Transforme dores do seu dia a dia em soluções inteligentes através do método "Aprender Fazendo".
+- **Depois:** Transforme dores do seu dia a dia em soluções inteligentes. Você não precisa saber programar. Só precisa de um problema chato para resolver e seguir os passos desse Guia, voce vai ver que não é tão dificil quanto parece e vai **aprender fazendo**.
 
 ---
 
@@ -23,7 +23,7 @@
 
 ### Título da seção
 - **Antes:** 0. O Ponto de Partida: A Dor Real
-- **Depois:** 0. Comece pela sua dor
+- **Depois:** 0. O Ponto de Partida. Comece pela sua dor
 
 ### Três perguntas-guia
 | Antes | Depois |
@@ -34,7 +34,7 @@
 
 ### Rótulos dos 6 cards de domínio
 - **Antes:** "O Problema:" / "O Agente:"
-- **Depois:** "O que incomoda:" / "O que o agente faz:"
+- **Depois:** "O que incomoda:" / "O que o agente vai fazer:"
 
 ---
 
@@ -66,7 +66,7 @@
 - **Depois:** Exemplo na prática — Lojinha de roupas
 
 ### Introdução
-- **Depois:** Pra ficar mais fácil de visualizar, vamos imaginar uma loja pequena. Veja como cada passo se encaixa no dia a dia dela:
+- **Depois:** Pra ficar mais fácil de visualizar, vamos imaginar uma pequena loja de roupas do seu bairro. Veja como cada passo se encaixa no dia a dia dela:
 
 ### Substituições dentro do exemplo
 - "Skills" → "o que ele sabe fazer"
@@ -109,9 +109,9 @@
 | Antes (referência) | Depois |
 |---|---|
 | O Comando é Seu | Você é o chefe — a IA executa, você decide |
-| Estrutura Importa | Organização ganha sempre |
-| Comece Simples | Não precisa ficar perfeito de primeira |
-| Itere Sempre | Volta sempre pra ajustar |
+| Estrutura Importa | Organização sempre ganha |
+| Comece Simples | Não tenha pressa, não precisa ficar perfeito de primeira |
+| Itere Sempre | Volte sempre pra ajustar quando encontar problemas |
 
 ### Copyright
 - **Antes:** Construído para humanos, potencializado por IA
@@ -131,7 +131,7 @@ Os rótulos do índice serão atualizados para refletir os novos títulos amigá
 - **Depois:** Aprenda a criar seu primeiro agente de IA do zero, mesmo sem ser de TI. Um guia simples, em 7 etapas, partindo de um problema real do seu dia a dia.
 
 ### `og:description` e `twitter:description`
-- **Depois:** Do zero ao seu primeiro agente — em 7 etapas simples, sem precisar ser de TI.
+- **Depois:** Do zero ao seu primeiro agente — em 7 etapas simples, sem precisar saber programar.
 
 ---
 
