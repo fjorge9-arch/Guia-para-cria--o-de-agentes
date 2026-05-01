@@ -14,15 +14,17 @@
     <meta property="og:type" content="article">
     <meta property="og:title" content="Seu primeiro agente de IA, sem mistério">
     <meta property="og:description" content="Do zero ao seu primeiro agente, em 7 etapas simples, sem precisar saber programar.">
+    <meta property="og:image" content="assets/images/og-image.png">
     <meta property="og:locale" content="pt_BR">
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Seu primeiro agente de IA, sem mistério">
     <meta name="twitter:description" content="Do zero ao seu primeiro agente, em 7 etapas simples, sem precisar saber programar.">
+    <meta name="twitter:image" content="assets/images/og-image.png">
 
-    <!-- Favicon (emoji robô via SVG inline) -->
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A4%96%3C/text%3E%3C/svg%3E">
+    <!-- Favicon (emoji robô) -->
+    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
 
     <!-- Tailwind CDN (apropriado para guia educacional; em produção real, prefira build compilado) -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -52,117 +54,7 @@
     </script>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body {
-            font-family: 'Inter', sans-serif;
-            scroll-behavior: smooth;
-            background-color: #f8f5f1; /* creme quente */
-        }
-        .dark body {
-            background-color: #18181b; /* zinc-900 — mais quente que slate-900 */
-        }
-        .step-card { transition: all 0.3s ease; }
-        .step-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
-        }
-        /* .workflow-arrow { color: #94a3b8; } */
-        /* UNUSED — era usada nos cards de fluxo com setas (fa-arrow-right/left/down).
-           Substituída pela timeline zigue-zague. Mantida aqui para referência. */
-        .highlight-box { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
-        .dark .highlight-box { background: linear-gradient(135deg, #2d1b69 0%, #4c1d95 100%); }
-        .prose-custom p { margin-bottom: 1rem; color: #475569; }
-        .dark .prose-custom p { color: #cbd5e1; }
-        .prompt-example {
-            background-color: #f1f5f9;
-            border-left: 4px solid #8b5cf6;
-            padding: 0.75rem 1rem;
-            margin-bottom: 1rem;
-            border-radius: 0 0.5rem 0.5rem 0;
-            font-size: 0.9rem;
-            color: #334155;
-            display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
-        }
-        .dark .prompt-example { background-color: #1e293b; color: #cbd5e1; }
-        .copy-btn {
-            flex-shrink: 0;
-            background: rgba(139,92,246,0.15);
-            border: 1px solid rgba(139,92,246,0.3);
-            color: #6d28d9;
-            font-size: 0.7rem;
-            font-weight: 600;
-            padding: 0.25rem 0.6rem;
-            border-radius: 0.4rem;
-            cursor: pointer;
-            font-style: normal;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-        .copy-btn:hover { background: rgba(139,92,246,0.3); }
-        .dark .copy-btn { background: rgba(139,92,246,0.2); color: #ddd6fe; border-color: rgba(196,181,253,0.4); }
-        .copy-btn.copied { background: #16a34a; color: white; border-color: #16a34a; }
-
-        /* TOC */
-        .toc-link.active {
-            background-color: #f5f3ff;
-            color: #6d28d9;
-            font-weight: 600;
-        }
-        .dark .toc-link.active { background-color: #4c1d95; color: #ddd6fe; }
-
-        /* Back to top */
-        #backToTop {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s;
-        }
-        #backToTop.visible { opacity: 1; pointer-events: auto; }
-
-        /* Timeline (Mapa da Jornada) */
-        .timeline { position: relative; }
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            transform: translateX(-50%);
-            background: linear-gradient(to bottom, #ddd6fe 0%, #8b5cf6 50%, #16a34a 100%);
-            border-radius: 9999px;
-        }
-        .dark .timeline::before {
-            background: linear-gradient(to bottom, #6d28d9 0%, #8b5cf6 50%, #16a34a 100%);
-        }
-        .timeline-item { position: relative; }
-        .timeline-dot {
-            position: absolute;
-            left: 50%;
-            top: 1.5rem;
-            transform: translate(-50%, 0);
-            width: 3.5rem;
-            height: 3.5rem;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 1.25rem;
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.15), 0 0 0 6px rgba(238,242,255,1);
-            z-index: 2;
-        }
-        .dark .timeline-dot { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 0 0 6px rgb(30 41 59); }
-
-        /* Mobile timeline: linha à esquerda */
-        @media (max-width: 767px) {
-            .timeline::before { left: 1.75rem; }
-            .timeline-dot { left: 1.75rem; top: 0.5rem; width: 3rem; height: 3rem; font-size: 1.1rem; }
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 leading-relaxed transition-colors">
 
@@ -860,7 +752,9 @@
                     <div class="bg-indigo-900/40 border border-indigo-700/40 rounded-2xl p-8 shadow-lg">
                         <p class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6 text-center">Desenvolvido por</p>
                         <div class="flex flex-col sm:flex-row items-center gap-6">
-                            <img src="autor.jpg" alt="Foto de Fernando Jorge da Silva" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-400/60 shadow-md shrink-0" loading="lazy">
+                            <a href="https://www.linkedin.com/in/fernandojorge/" target="_blank" rel="noopener" class="shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-indigo-900" aria-label="Perfil de Fernando Jorge da Silva no LinkedIn" title="Ver perfil no LinkedIn">
+                                <img src="assets/images/autor.jpg" alt="Foto de Fernando Jorge da Silva" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-400/60 shadow-md hover:border-indigo-300 hover:scale-105 transition-all" loading="lazy">
+                            </a>
                             <div class="flex-1 text-center sm:text-left">
                                 <h3 class="text-2xl font-bold text-white mb-3">Fernando Jorge da Silva</h3>
                                 <div class="flex flex-wrap justify-center sm:justify-start gap-2 text-sm">
@@ -890,63 +784,7 @@
         </div>
     </div>
 
-    <script>
-        // Dark mode
-        (function() {
-            const root = document.documentElement;
-            const saved = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            if (saved === 'dark' || (!saved && prefersDark)) root.classList.add('dark');
-            document.getElementById('darkToggle').addEventListener('click', () => {
-                root.classList.toggle('dark');
-                localStorage.setItem('theme', root.classList.contains('dark') ? 'dark' : 'light');
-            });
-        })();
-
-        // Copy buttons
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                const parent = btn.parentElement;
-                const clone = parent.cloneNode(true);
-                clone.querySelectorAll('.copy-btn').forEach(b => b.remove());
-                const text = clone.innerText.trim();
-                navigator.clipboard.writeText(text).then(() => {
-                    const original = btn.textContent;
-                    btn.textContent = 'Copiado!';
-                    btn.classList.add('copied');
-                    setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
-                });
-            });
-        });
-
-        // Back to top
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 400) backToTop.classList.add('visible');
-            else backToTop.classList.remove('visible');
-        });
-        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-
-        // TOC active link
-        const tocLinks = document.querySelectorAll('.toc-link');
-        const sections = Array.from(tocLinks).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const id = entry.target.id;
-                    tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
-                }
-            });
-        }, { rootMargin: '-30% 0px -60% 0px' });
-        sections.forEach(s => observer.observe(s));
-
-        // Mobile TOC
-        const tocMobile = document.getElementById('tocMobile');
-        document.getElementById('tocToggleMobile').addEventListener('click', () => tocMobile.classList.remove('hidden'));
-        document.getElementById('tocCloseMobile').addEventListener('click', () => tocMobile.classList.add('hidden'));
-        tocMobile.addEventListener('click', e => { if (e.target === tocMobile) tocMobile.classList.add('hidden'); });
-        tocMobile.querySelectorAll('a').forEach(a => a.addEventListener('click', () => tocMobile.classList.add('hidden')));
-    </script>
+    <script src="assets/js/main.js"></script>
 
 </body>
 </html>

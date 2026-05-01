@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+body {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+    background-color: #f8f5f1; /* creme quente */
+}
+.dark body {
+    background-color: #18181b; /* zinc-900 — mais quente que slate-900 */
+}
+.step-card { transition: all 0.3s ease; }
+.step-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
+/* .workflow-arrow { color: #94a3b8; } */
+/* UNUSED — era usada nos cards de fluxo com setas (fa-arrow-right/left/down).
+   Substituída pela timeline zigue-zague. Mantida aqui para referência. */
+.highlight-box { background: linear-gradient(135deg, #f5f3ff 0%, #ede9fe 100%); }
+.dark .highlight-box { background: linear-gradient(135deg, #2d1b69 0%, #4c1d95 100%); }
+.prose-custom p { margin-bottom: 1rem; color: #475569; }
+.dark .prose-custom p { color: #cbd5e1; }
+.prompt-example {
+    background-color: #f1f5f9;
+    border-left: 4px solid #8b5cf6;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    font-size: 0.9rem;
+    color: #334155;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+.dark .prompt-example { background-color: #1e293b; color: #cbd5e1; }
+.copy-btn {
+    flex-shrink: 0;
+    background: rgba(139,92,246,0.15);
+    border: 1px solid rgba(139,92,246,0.3);
+    color: #6d28d9;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-style: normal;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+.copy-btn:hover { background: rgba(139,92,246,0.3); }
+.dark .copy-btn { background: rgba(139,92,246,0.2); color: #ddd6fe; border-color: rgba(196,181,253,0.4); }
+.copy-btn.copied { background: #16a34a; color: white; border-color: #16a34a; }
+
+/* TOC */
+.toc-link.active {
+    background-color: #f5f3ff;
+    color: #6d28d9;
+    font-weight: 600;
+}
+.dark .toc-link.active { background-color: #4c1d95; color: #ddd6fe; }
+
+/* Back to top */
+#backToTop {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+}
+#backToTop.visible { opacity: 1; pointer-events: auto; }
+
+/* Timeline (Mapa da Jornada) */
+.timeline { position: relative; }
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    transform: translateX(-50%);
+    background: linear-gradient(to bottom, #ddd6fe 0%, #8b5cf6 50%, #16a34a 100%);
+    border-radius: 9999px;
+}
+.dark .timeline::before {
+    background: linear-gradient(to bottom, #6d28d9 0%, #8b5cf6 50%, #16a34a 100%);
+}
+.timeline-item { position: relative; }
+.timeline-dot {
+    position: absolute;
+    left: 50%;
+    top: 1.5rem;
+    transform: translate(-50%, 0);
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 700;
+    font-size: 1.25rem;
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.15), 0 0 0 6px rgba(238,242,255,1);
+    z-index: 2;
+}
+.dark .timeline-dot { box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3), 0 0 0 6px rgb(30 41 59); }
+
+/* Mobile timeline: linha à esquerda */
+@media (max-width: 767px) {
+    .timeline::before { left: 1.75rem; }
+    .timeline-dot { left: 1.75rem; top: 0.5rem; width: 3rem; height: 3rem; font-size: 1.1rem; }
+}
