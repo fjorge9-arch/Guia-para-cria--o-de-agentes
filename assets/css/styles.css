@@ -105,5 +105,6 @@ body {
 /* Mobile timeline: linha à esquerda */
 @media (max-width: 767px) {
     .timeline::before { left: 1.75rem; }
-    .timeline-dot { left: 1.75rem; top: 0.5rem; width: 3rem; height: 3rem; font-size: 1.1rem; }
+    /* center = -2.25rem from li = 1.75rem from ol (matches ::before line), sits fully in ol's pl-16 padding */
+    .timeline-dot { left: -2.25rem; top: 0.5rem; width: 3rem; height: 3rem; font-size: 1.1rem; }
 }
