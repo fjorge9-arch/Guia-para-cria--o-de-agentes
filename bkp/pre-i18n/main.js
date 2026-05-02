@@ -19,7 +19,7 @@ document.querySelectorAll('.copy-btn').forEach(btn => {
         const text = clone.innerText.trim();
         navigator.clipboard.writeText(text).then(() => {
             const original = btn.textContent;
-            btn.textContent = window.t ? window.t('ui.copied') : 'Copiado!';
+            btn.textContent = 'Copiado!';
             btn.classList.add('copied');
             setTimeout(() => { btn.textContent = original; btn.classList.remove('copied'); }, 1500);
         });
