@@ -44,8 +44,8 @@ Este repositório utiliza o modelo SDLC orientado por papéis de agente para orq
 - **Atuação nesta fusão:** execução completa dos checklists de T10 e T11; validação de T12 (robots.txt e sitemap); smoke test de T15 em produção.
 
 ### Release Engineer
-- **Responsabilidade:** garantir que a entrega em produção seja confiável, com HTTPS ativo, redirects configurados e repositórios de origem arquivados corretamente.
-- **Atuação nesta fusão:** execução de T15 (GitHub Pages / domínio) e T16 (arquivamento dos repos de origem).
+- **Responsabilidade:** garantir que a entrega em produção seja confiável, com HTTPS ativo, redirects configurados, cutover sem downtime e repositórios de origem arquivados corretamente.
+- **Atuação nesta fusão:** execução de T15 (provisionar Cloudflare Pages), T16 (`_headers` e `_redirects`), T17 (validação em `staging.desmistificando-ia.com`), T18 (cutover do apex com rollback documentado) e T19 (arquivamento dos repos de origem).
 
 ---
 

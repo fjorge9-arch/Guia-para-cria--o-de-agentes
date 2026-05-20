@@ -119,6 +119,18 @@ desmistificando-ia/
 - Decisão: chaves `theme` e `lang` são compartilhadas (mesma chave, mesmo domínio — o browser já as compartilha por origem); chaves de progresso da Plataforma (`studyProgress`, etc.) permanecem isoladas e inalteradas.
 - Racional: o usuário que alternava dark mode no Guia já esperaria que a preferência persistisse — agora persiste de forma explícita e documentada.
 
+**ADR-008 — Hospedagem em Cloudflare Pages (Git integration)**
+- Decisão: o site unificado é publicado em **Cloudflare Pages** com integração direta ao repositório `desmistificando-ia` no GitHub. Build command vazio (sem step de build — RNF4); output directory = raiz do repositório (`/`). Produção é o branch `main`; demais branches e Pull Requests geram **Preview Deployments** automáticos em URLs `<hash>.<projeto>.pages.dev`.
+- Racional: o conteúdo é 100% estático; Pages oferece CDN global, HTTPS automático, previews por PR sem custo adicional e integra-se nativamente ao DNS da Cloudflare, que já hospeda a zona `desmistificando-ia.com`. Evita-se a dependência do GitHub Pages e mantém-se infra concentrada em um único provedor.
+
+**ADR-009 — DNS e custom domain**
+- Decisão: o domínio `desmistificando-ia.com` já está delegado à Cloudflare (DNS + proxy ativo). O custom domain é vinculado ao projeto Pages via Pages → Custom domains, gerando automaticamente registros DNS gerenciados (CNAME flattening na apex). Não há nameservers externos a alterar.
+- Racional: aproveita a zona já existente; HTTPS via certificado universal Cloudflare; sem migração de DNS.
+
+**ADR-010 — Cutover sem downtime**
+- Decisão: o deploy em produção é validado primeiro no domínio de preview (`<projeto>.pages.dev`) e em uma URL `staging.desmistificando-ia.com` apontada ao mesmo projeto, antes de promover o apex para o novo Pages. A troca DNS/custom-domain do apex ocorre apenas após smoke test verde. O repositório/host atual em produção permanece servindo até a promoção; em caso de regressão, o custom domain é desvinculado do Pages, restaurando o destino anterior.
+- Racional: o site já está em produção; usuários reais consomem o domínio. O risco de servir um build quebrado é mitigado por validar o conteúdo idêntico em um hostname secundário antes do swap.
+
 ---
 
 ### Requisitos Funcionais
@@ -156,6 +168,21 @@ O `robots.txt` e `sitemap.xml` na raiz do novo repositório devem cobrir tanto a
 **RF11 — Paths internos corrigidos**
 Todas as referências a arquivos (CSS, JS, imagens, fontes) dentro dos HTMLs de ambas as seções devem apontar corretamente para `/assets/` após a unificação, sem links quebrados.
 
+**RF12 — Projeto Cloudflare Pages provisionado**
+Um projeto Cloudflare Pages deve ser criado e conectado ao repositório `desmistificando-ia` no GitHub, com: production branch = `main`; build command = vazio; build output directory = `/` (raiz); framework preset = "None"; node version = não aplicável. Cada push em `main` deve disparar deploy de produção automaticamente.
+
+**RF13 — Preview Deployments por Pull Request**
+Toda PR aberta contra `main` deve gerar automaticamente uma URL de preview no formato `<hash>.<projeto>.pages.dev`. A URL de preview deve ser comentada na PR pelo bot do Cloudflare Pages (integração GitHub padrão) e deve refletir o build da branch da PR sem afetar produção.
+
+**RF14 — Custom domain apex e www**
+O custom domain `desmistificando-ia.com` (apex) deve ser vinculado ao projeto Pages via Pages → Custom domains, com certificado universal Cloudflare ativo. O hostname `www.desmistificando-ia.com` deve resolver para o mesmo destino (redirect 301 para o apex ou bind direto, conforme decisão operacional). Adicionalmente, um hostname `staging.desmistificando-ia.com` deve ser vinculado ao mesmo projeto para validação pré-cutover.
+
+**RF15 — Headers e cache de assets estáticos**
+O projeto Pages deve servir os assets com headers adequados a um site estático: `Cache-Control` longo (≥ 1 ano) para arquivos em `/assets/` (imutáveis com hash de versão quando aplicável); `Cache-Control` curto/no-cache para `index.html` e `estudos/index.html` (para que mudanças sejam refletidas imediatamente). Configurado via arquivo `_headers` na raiz do repositório.
+
+**RF16 — Redirects de compatibilidade**
+Um arquivo `_redirects` na raiz do repositório deve cobrir: redirect de `www.desmistificando-ia.com/*` para `https://desmistificando-ia.com/:splat` (301); quaisquer URLs antigas conhecidas das duas seções de origem que mudaram de path durante a fusão. Sem redirects, nenhuma URL pública previamente indexada pode retornar 404.
+
 ---
 
 ### Requisitos Não Funcionais
@@ -183,6 +210,15 @@ Ambas as seções devem funcionar corretamente a partir de servidor local (Live 
 
 **RNF8 — Compatibilidade de domínio**
 Após a migração para produção, nenhuma URL pública existente deve retornar 404 sem redirect adequado configurado.
+
+**RNF9 — Cutover sem downtime**
+A promoção do novo projeto Cloudflare Pages para o apex `desmistificando-ia.com` deve ocorrer apenas após validação verde em `staging.desmistificando-ia.com` e em uma URL `*.pages.dev`. Em caso de regressão crítica detectada após o cutover, deve existir caminho de rollback documentado e executável em ≤ 15 minutos (desvincular custom domain do novo projeto e restaurar o destino anterior).
+
+**RNF10 — Segredos do pipeline fora do repositório**
+Tokens da Cloudflare API (caso usados para deploy via Wrangler em CI fora da Git integration nativa) devem residir exclusivamente em GitHub Actions Secrets ou em Cloudflare Pages environment variables (escopo de produção e preview separados). Nenhum token pode ser commitado, nem mesmo em arquivos de exemplo.
+
+**RNF11 — HTTPS obrigatório e HSTS**
+O domínio de produção deve servir exclusivamente via HTTPS (Cloudflare SSL/TLS mode = Full strict). Recomenda-se HSTS habilitado com `max-age` ≥ 6 meses após validação inicial de estabilidade (não obrigatório no primeiro deploy, mas registrado como follow-up).
 
 ---
 
@@ -243,6 +279,16 @@ Após a migração para produção, nenhuma URL pública existente deve retornar
 
 **CA8:** Nenhum arquivo dos repositórios de origem foi perdido — verificação por diff completo de arquivos.
 
+**CA9:** Projeto Cloudflare Pages conectado ao repositório `desmistificando-ia` está deployando `main` automaticamente em produção, com último build verde visível no dashboard Pages.
+
+**CA10:** Pelo menos uma PR de exemplo (real ou de teste) gerou Preview Deployment funcional em `<hash>.<projeto>.pages.dev`, com URL comentada na PR pela integração Cloudflare/GitHub.
+
+**CA11:** `https://desmistificando-ia.com/` e `https://desmistificando-ia.com/estudos/` estão servidos pelo novo projeto Pages, com HTTPS válido (cadeado verde, SSL/TLS = Full strict), sem mixed content e sem 404 em recursos referenciados.
+
+**CA12:** Arquivos `_headers` e `_redirects` estão na raiz do repositório, versionados, e seu efeito foi verificado em produção (cache headers corretos via `curl -I`; redirect 301 de `www` para apex).
+
+**CA13:** Procedimento de rollback documentado em `fusion/TASKS.md` (T15) e validado em ensaio (dry run ou execução real durante validação de staging).
+
 ---
 
 ### Fases de Migração
@@ -257,3 +303,6 @@ Após a migração para produção, nenhuma URL pública existente deve retornar
 | 6 | Validação funcional completa | RF7, RF8 | CA2, CA3 |
 | 7 | robots.txt + sitemap.xml | RF10 | CA6 |
 | 8 | Gate OWASP e encerramento | RNF5, RNF6 | CA7, CA8 |
+| 9 | Provisionamento do projeto Cloudflare Pages | RF12, RF13, RF15, RF16, RNF10 | CA9, CA10, CA12 |
+| 10 | Validação em staging.desmistificando-ia.com | RNF9 | CA11 (parcial), CA13 |
+| 11 | Cutover do apex para Cloudflare Pages | RF14, RNF8, RNF9, RNF11 | CA11 |

@@ -263,23 +263,79 @@ Vínculos: RF = Requisito Funcional | RNF = Requisito Não Funcional | CA = Crit
   2. Lista de arquivos eliminados intencionalmente documentada nesta task.
 - **Dependências:** T13.
 
-### T15 — Publicar no GitHub Pages / domínio de produção [P1]
+### T15 — Provisionar projeto Cloudflare Pages [P1]
 
-- **Objetivo:** colocar o repositório unificado em produção no domínio `desmistificando-ia.com`.
-- **Vínculo SPEC:** RNF8.
+- **Objetivo:** criar e conectar o projeto Cloudflare Pages ao repositório `desmistificando-ia`, com deploy automático de `main` e Preview Deployments por PR — sem ainda promover o apex.
+- **Vínculo SPEC:** RF12, RF13, RNF10, ADR-008.
 - **Passos:**
-  1. Configurar GitHub Pages no repositório `desmistificando-ia` (branch `main`, pasta raiz `/`).
-  2. Configurar CNAME / DNS para apontar `desmistificando-ia.com` para o GitHub Pages.
-  3. Validar HTTPS ativo.
-  4. Validar que `https://desmistificando-ia.com/` carrega o Guia.
-  5. Validar que `https://desmistificando-ia.com/estudos/` carrega a Plataforma.
-  6. Configurar redirects se necessário (arquivo `_redirects` para Netlify ou equivalente).
+  1. No dashboard Cloudflare → Workers & Pages → Create application → Pages → Connect to Git, selecionar `fjorge9-arch/desmistificando-ia`.
+  2. Configurar: production branch = `main`; framework preset = "None"; build command = vazio; build output directory = `/`.
+  3. Deixar Preview Deployments habilitado para "All non-Production branches" (padrão).
+  4. Conceder à integração Cloudflare/GitHub permissão de comentar nas PRs (Settings → Builds & deployments → Pull request comments = on).
+  5. Disparar o primeiro deploy de `main` e validar build verde no dashboard.
+  6. Abrir uma PR de teste (alteração trivial em comentário ou whitespace), confirmar que o bot da Cloudflare comenta a URL `<hash>.<projeto>.pages.dev` e que ela serve o conteúdo da branch; fechar a PR sem merge.
+  7. Confirmar que nenhum token da Cloudflare API foi adicionado ao repositório (a Git integration nativa não exige).
 - **DoD:**
-  1. Ambas as URLs públicas carregam sem erro, com HTTPS.
-  2. Nenhuma URL pública existente retorna 404.
+  1. Projeto Pages existe e o último deploy de `main` está verde.
+  2. URL `https://<projeto>.pages.dev` serve o site unificado.
+  3. PR de teste recebeu comentário automático com URL de preview funcional.
 - **Dependências:** T14.
 
-### T16 — Arquivar repositórios de origem [P2]
+### T16 — Configurar `_headers` e `_redirects` [P1]
+
+- **Objetivo:** versionar regras de cache e redirects exigidas pelo Cloudflare Pages para servir o site corretamente.
+- **Vínculo SPEC:** RF15, RF16, RNF8.
+- **Passos:**
+  1. Criar `_headers` na raiz com: `/assets/*` → `Cache-Control: public, max-age=31536000, immutable`; `/index.html` e `/estudos/index.html` → `Cache-Control: public, max-age=0, must-revalidate`.
+  2. Criar `_redirects` na raiz com: `https://www.desmistificando-ia.com/* https://desmistificando-ia.com/:splat 301!`; adicionar quaisquer redirects 301 necessários para URLs antigas das duas seções de origem que mudaram de path.
+  3. Commitar em `main`, aguardar o deploy do Pages e validar via `curl -I` na URL `*.pages.dev` que os headers retornados refletem as regras.
+- **DoD:**
+  1. Arquivos `_headers` e `_redirects` versionados na raiz.
+  2. `curl -I https://<projeto>.pages.dev/assets/css/styles.css` retorna `Cache-Control` longo.
+  3. `curl -I https://<projeto>.pages.dev/` retorna `Cache-Control` curto/no-cache para o HTML.
+- **Dependências:** T15.
+
+### T17 — Vincular `staging.desmistificando-ia.com` e validar pré-cutover [P1]
+
+- **Objetivo:** servir o novo build em um hostname secundário para validação funcional completa sem afetar o apex em produção.
+- **Vínculo SPEC:** RF14, RNF9, CA11 (parcial), CA13.
+- **Passos:**
+  1. No projeto Pages → Custom domains → Set up a custom domain, adicionar `staging.desmistificando-ia.com`. Aceitar a criação automática do registro DNS (CNAME para `<projeto>.pages.dev`) na zona Cloudflare existente.
+  2. Aguardar emissão do certificado universal e propagação (geralmente < 5 min).
+  3. Executar os checklists funcionais de T10 e T11 contra `https://staging.desmistificando-ia.com/` e `https://staging.desmistificando-ia.com/estudos/`.
+  4. Validar HTTPS (cadeado, SSL/TLS = Full strict no painel Cloudflare).
+  5. Validar redirects de `_redirects` (ex.: simular acesso a URLs antigas conhecidas).
+  6. Documentar nesta task: lista de URLs testadas, evidências (screenshots ou notas), e o **procedimento de rollback** (passos exatos para desvincular o custom domain do novo projeto Pages e restaurar o destino anterior do apex).
+- **DoD:**
+  1. `staging.desmistificando-ia.com` serve o site unificado com HTTPS válido.
+  2. Checklists funcionais executados sem regressão crítica.
+  3. Procedimento de rollback escrito e revisado.
+- **Dependências:** T16.
+
+### T18 — Cutover do apex `desmistificando-ia.com` para Cloudflare Pages [P1]
+
+- **Objetivo:** promover o novo projeto Pages para o apex em produção, com janela de mudança planejada e capacidade de rollback rápido.
+- **Vínculo SPEC:** RF14, RNF8, RNF9, RNF11, CA11.
+- **Passos:**
+  1. Anunciar janela de cutover (data/hora, duração estimada, impacto esperado nulo).
+  2. Confirmar que o destino atual do apex está identificado (registro DNS atual anotado para rollback).
+  3. No projeto Pages → Custom domains, adicionar `desmistificando-ia.com` (apex) e `www.desmistificando-ia.com`. A Cloudflare ajusta automaticamente os registros DNS proxied na zona.
+  4. Aguardar emissão do certificado universal para o apex.
+  5. Validar imediatamente após swap: `https://desmistificando-ia.com/`, `/estudos/`, redirect de `www`, HTTPS, sem mixed content, smoke test das principais features (RF7 + RF8).
+  6. Configurar SSL/TLS mode = Full strict (se ainda não estiver) e habilitar "Always Use HTTPS".
+  7. Registrar o horário exato do cutover e os resultados da validação pós-deploy nesta task.
+- **Rollback (se necessário):**
+  1. Em Pages → Custom domains, remover `desmistificando-ia.com` do projeto.
+  2. Restaurar o registro DNS anterior do apex anotado no passo 2.
+  3. Confirmar que o destino antigo voltou a servir o conteúdo.
+  4. Tempo alvo: ≤ 15 minutos (RNF9).
+- **DoD:**
+  1. Apex e `www` servidos pelo Cloudflare Pages com HTTPS válido (CA11).
+  2. Smoke test pós-cutover sem regressão crítica.
+  3. Nenhuma URL pública previamente indexada retorna 404 (validar com lista do `sitemap.xml` anterior, se disponível).
+- **Dependências:** T17.
+
+### T19 — Arquivar repositórios de origem [P2]
 
 - **Objetivo:** sinalizar que `Guia-para-criacao-de-agentes` e `Material-de-estudo` não são mais os repositórios ativos.
 - **Vínculo SPEC:** ADR-001.
@@ -289,7 +345,7 @@ Vínculos: RF = Requisito Funcional | RNF = Requisito Não Funcional | CA = Crit
 - **DoD:**
   1. Ambos os repos de origem marcados como arquivados no GitHub.
   2. README de cada um contém link para `desmistificando-ia`.
-- **Dependências:** T15.
+- **Dependências:** T18.
 
 ---
 
