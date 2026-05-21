@@ -1,0 +1,22 @@
+# Cloudflare Pages — cache & security headers
+# Assets versionáveis: cache longo e imutável
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# HTMLs: sempre buscar versão fresca (sem stale após deploy)
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/estudos/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Cabeçalhos de segurança aplicados a todo o site
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

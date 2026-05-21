@@ -1,0 +1,6 @@
+# Cloudflare Workers static assets — redirects (apenas URLs relativas)
+# Obs: www -> apex deve ser configurado via Bulk Redirect / Page Rule no zone DNS,
+# pois Workers static assets nao aceita URLs absolutas em _redirects.
+
+# Estudos sem barra final -> com barra (canonical)
+/estudos /estudos/ 301

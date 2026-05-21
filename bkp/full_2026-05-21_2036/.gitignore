@@ -18,9 +18,3 @@ npm-debug.log*
 # Temporários
 *.tmp
 *.bak
-
-# Dependências
-node_modules/
-
-# CSS gerado pelo Tailwind (reconstruído no build)
-assets/css/output.css

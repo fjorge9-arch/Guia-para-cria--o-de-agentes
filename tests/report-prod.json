@@ -1,0 +1,425 @@
+{
+  "base": "http://localhost:5500",
+  "startedAt": "2026-05-21T22:44:40.343Z",
+  "pages": {
+    "/": {
+      "status": 200
+    },
+    "/estudos/": {
+      "status": 200
+    }
+  },
+  "lessons": {
+    "passed": [
+      {
+        "file": "content/sdlc-agentes/Agente Arquiteto_ Trade-offs e ADRs.md",
+        "title": "Agente Arquiteto - Trade-offs e ADRs",
+        "proseLen": 63049
+      },
+      {
+        "file": "content/sdlc-agentes/Agente CI_CD_ Automação, Métricas e Resiliência.md",
+        "title": "Agente CI/CD - Automacao",
+        "proseLen": 106960
+      },
+      {
+        "file": "content/sdlc-agentes/Agente de QA Autônomo_ Busca e Avaliação.md",
+        "title": "Agente QA Autonomo",
+        "proseLen": 63232
+      },
+      {
+        "file": "content/sdlc-agentes/Agente Desenvolvedor Autônomo_ Arquitetura.md",
+        "title": "Agente Desenvolvedor Autonomo",
+        "proseLen": 47420
+      },
+      {
+        "file": "content/sdlc-agentes/Agente IA para Ciclo de Vida de TI.md",
+        "title": "Agente IA para Ciclo de Vida de TI",
+        "proseLen": 55525
+      },
+      {
+        "file": "content/sdlc-agentes/Agente Revisor_ Qualidade e Segurança de Código.md",
+        "title": "Agente Revisor",
+        "proseLen": 46139
+      },
+      {
+        "file": "content/sdlc-agentes/Agentes e Skills para Ciclo de Vida SDLC.md",
+        "title": "Agentes e Skills SDLC",
+        "proseLen": 6206
+      },
+      {
+        "file": "content/qa/analista-testes-playwright.md",
+        "title": "Analista de Testes com Playwright",
+        "proseLen": 71737
+      },
+      {
+        "file": "content/arquitetura/arquiteto-microsoft.md",
+        "title": "Arquiteto Microsoft",
+        "proseLen": 49597
+      },
+      {
+        "file": "content/ia/Arquitetura e Práticas de IA Moderna.md",
+        "title": "Arquitetura e Praticas de IA Moderna",
+        "proseLen": 64575
+      },
+      {
+        "file": "content/agil/Automação de Scrum Master com IA.md",
+        "title": "Automacao de Scrum Master com IA",
+        "proseLen": 44374
+      },
+      {
+        "file": "content/dados/cientistadedados-azuredatabricks.md",
+        "title": "Cientista de Dados Azure Databricks",
+        "proseLen": 29491
+      },
+      {
+        "file": "content/dynamics365/Consultor Business Central_ Habilidades Essenciais.md",
+        "title": "Consultor BC - Habilidades Essenciais",
+        "proseLen": 59947
+      },
+      {
+        "file": "content/dynamics365/consultor-dynamics365-bc.md",
+        "title": "Consultor D365 BC (resumo)",
+        "proseLen": 1122
+      },
+      {
+        "file": "content/dynamics365/consultor-dynamics365-fo.md",
+        "title": "Consultor D365 FO (resumo)",
+        "proseLen": 1120
+      },
+      {
+        "file": "content/dynamics365/consultor-senior-dynamics365.md",
+        "title": "Consultor Senior Dynamics",
+        "proseLen": 33539
+      },
+      {
+        "file": "content/requisitos/Criação de Agente de Análise de Requisitos.md",
+        "title": "Criacao de Agente de Requisitos",
+        "proseLen": 54166
+      },
+      {
+        "file": "content/ia/engenharia-prompt-agentes.md",
+        "title": "Engenharia de Prompt para Agentes",
+        "proseLen": 83044
+      },
+      {
+        "file": "content/requisitos/engenharia-requisitos-ia.md",
+        "title": "Engenharia de Requisitos com IA",
+        "proseLen": 8617
+      },
+      {
+        "file": "content/requisitos/engenharia-requisitos.md",
+        "title": "Engenharia de Requisitos",
+        "proseLen": 36605
+      },
+      {
+        "file": "content/power-platform/especialista-copilot-studio.md",
+        "title": "Especialista Copilot Studio",
+        "proseLen": 54170
+      },
+      {
+        "file": "content/dynamics365/especialista-dynamics365-ci.md",
+        "title": "Especialista Dynamics CI",
+        "proseLen": 48484
+      },
+      {
+        "file": "content/dynamics365/especialista-dynamics365-cs.md",
+        "title": "Especialista Dynamics CS",
+        "proseLen": 27781
+      },
+      {
+        "file": "content/power-platform/especialista-power-apps.md",
+        "title": "Especialista Power Apps",
+        "proseLen": 22888
+      },
+      {
+        "file": "content/power-platform/especialista-power-automate.md",
+        "title": "Especialista Power Automate",
+        "proseLen": 245253
+      },
+      {
+        "file": "content/power-platform/especialista-power-pages.md",
+        "title": "Especialista Power Pages",
+        "proseLen": 64549
+      },
+      {
+        "file": "content/erp/especialista_sap.md",
+        "title": "Especialista SAP",
+        "proseLen": 25559
+      },
+      {
+        "file": "content/dynamics365/Perfil Consultor Dynamics F&O.md",
+        "title": "Perfil Consultor Dynamics F&O",
+        "proseLen": 47205
+      },
+      {
+        "file": "content/ia/Perfil Profissional Azure AI Foundry.md",
+        "title": "Perfil Azure AI Foundry",
+        "proseLen": 72857
+      },
+      {
+        "file": "content/dados/profissional-powerbi.md",
+        "title": "Profissional Power BI",
+        "proseLen": 101363
+      },
+      {
+        "file": "content/engenharia/SDD e IA em Codificação.md",
+        "title": "SDD e IA em Codificacao",
+        "proseLen": 50255
+      },
+      {
+        "file": "content/requisitos/Skill de Requisitos com IA.md",
+        "title": "Skill de Requisitos com IA",
+        "proseLen": 122933
+      }
+    ],
+    "failed": []
+  },
+  "tabs": {
+    "licoes": {
+      "count": 32,
+      "expected": 32
+    },
+    "quiz": {
+      "rendered": true
+    },
+    "simulado": {
+      "rendered": true
+    },
+    "historico": {
+      "rendered": true
+    }
+  },
+  "i18n": {
+    "en": {
+      "htmlLang": "en-US",
+      "licoesLabel": "Lessons"
+    },
+    "es": {
+      "htmlLang": "es-419",
+      "licoesLabel": "Lecciones"
+    },
+    "pt": {
+      "htmlLang": "pt-BR",
+      "licoesLabel": "Lições"
+    }
+  },
+  "hero": {
+    "guide": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "topbar": {
+        "x": 0,
+        "y": 16,
+        "w": 1440,
+        "h": 44,
+        "top": 16,
+        "bottom": 60,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "16px",
+        "lineHeight": "26px",
+        "fontWeight": "400",
+        "color": "rgb(30, 41, 59)",
+        "background": "rgba(0, 0, 0, 0)",
+        "gap": "normal"
+      },
+      "hero": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 332,
+        "top": 0,
+        "bottom": 332,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "16px",
+        "lineHeight": "26px",
+        "fontWeight": "400",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(109, 40, 217)",
+        "gap": "normal"
+      },
+      "title": {
+        "x": 104,
+        "y": 68,
+        "w": 256.4,
+        "h": 200,
+        "top": 68,
+        "bottom": 268,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "40px",
+        "lineHeight": "50px",
+        "fontWeight": "700",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)",
+        "gap": "normal"
+      },
+      "paragraphs": [
+        {
+          "x": 400,
+          "y": 70,
+          "w": 936,
+          "h": 56,
+          "top": 70,
+          "bottom": 126,
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "fontWeight": "300",
+          "color": "rgb(237, 233, 254)",
+          "background": "rgba(0, 0, 0, 0)",
+          "gap": "normal"
+        },
+        {
+          "x": 400,
+          "y": 158,
+          "w": 936,
+          "h": 28,
+          "top": 158,
+          "bottom": 186,
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "fontWeight": "300",
+          "color": "rgb(237, 233, 254)",
+          "background": "rgba(0, 0, 0, 0)",
+          "gap": "normal"
+        }
+      ],
+      "gapsBetweenParagraphs": [
+        32
+      ],
+      "titleToFirstParagraphTopDelta": 2,
+      "heroToNextSibling": {
+        "tag": "div",
+        "cls": "max-w-7xl",
+        "gap": 0
+      }
+    },
+    "plataforma": {
+      "viewport": {
+        "w": 1440,
+        "h": 900
+      },
+      "topbar": {
+        "x": 0,
+        "y": 0,
+        "w": 1440,
+        "h": 72,
+        "top": 0,
+        "bottom": 72,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "16px",
+        "lineHeight": "25.6px",
+        "fontWeight": "400",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(109, 40, 217)",
+        "gap": "normal"
+      },
+      "hero": {
+        "x": 0,
+        "y": 72,
+        "w": 1440,
+        "h": 274,
+        "top": 72,
+        "bottom": 346,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "16px",
+        "lineHeight": "25.6px",
+        "fontWeight": "400",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgb(109, 40, 217)",
+        "gap": "normal"
+      },
+      "title": {
+        "x": 104,
+        "y": 108,
+        "w": 250.1,
+        "h": 150,
+        "top": 108,
+        "bottom": 258,
+        "paddingTop": "0px",
+        "paddingBottom": "0px",
+        "paddingLeft": "0px",
+        "paddingRight": "0px",
+        "fontSize": "40px",
+        "lineHeight": "50px",
+        "fontWeight": "700",
+        "color": "rgb(255, 255, 255)",
+        "background": "rgba(0, 0, 0, 0)",
+        "gap": "normal"
+      },
+      "paragraphs": [
+        {
+          "x": 400,
+          "y": 110,
+          "w": 936,
+          "h": 56,
+          "top": 110,
+          "bottom": 166,
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "fontWeight": "300",
+          "color": "rgb(224, 231, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "gap": "normal"
+        },
+        {
+          "x": 400,
+          "y": 198,
+          "w": 936,
+          "h": 84,
+          "top": 198,
+          "bottom": 282,
+          "paddingTop": "0px",
+          "paddingBottom": "0px",
+          "paddingLeft": "0px",
+          "paddingRight": "0px",
+          "fontSize": "20px",
+          "lineHeight": "28px",
+          "fontWeight": "300",
+          "color": "rgb(224, 231, 255)",
+          "background": "rgba(0, 0, 0, 0)",
+          "gap": "normal"
+        }
+      ],
+      "gapsBetweenParagraphs": [
+        32
+      ],
+      "titleToFirstParagraphTopDelta": 2,
+      "heroToNextSibling": {
+        "tag": "nav",
+        "cls": "tabs",
+        "gap": 0
+      }
+    }
+  },
+  "consoleErrors": [],
+  "networkErrors": [],
+  "pageErrors": []
+}

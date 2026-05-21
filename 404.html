@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página não encontrada — Desmistificando IA</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+  <script>
+    (function(){
+      var t=localStorage.getItem('theme');
+      if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))
+        document.documentElement.classList.add('dark');
+    })();
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <style>
+    body {
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', system-ui, sans-serif;
+      text-align: center;
+      padding: 2rem;
+    }
+    .dark body { background: #18181b; color: #e2e8f0; }
+    .error-code {
+      font-size: clamp(5rem, 20vw, 8rem);
+      font-weight: 900;
+      color: var(--primary);
+      line-height: 1;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.04em;
+    }
+    .error-icon {
+      font-size: 2rem;
+      color: var(--primary);
+      margin-bottom: 1rem;
+      opacity: 0.6;
+    }
+    .error-title {
+      font-size: clamp(1.25rem, 4vw, 1.75rem);
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .error-desc {
+      color: var(--muted);
+      max-width: 440px;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+    }
+    .btn-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--primary);
+      color: #fff;
+      text-decoration: none;
+      padding: 0.75rem 2rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-home:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+  </style>
+</head>
+<body>
+  <p class="error-icon"><i class="fas fa-robot" aria-hidden="true"></i></p>
+  <div class="error-code">404</div>
+  <h1 class="error-title">Página não encontrada</h1>
+  <p class="error-desc">A página que você está procurando não existe ou foi movida. Volte ao guia e continue aprendendo.</p>
+  <a href="/" class="btn-home">
+    <i class="fas fa-house" aria-hidden="true"></i>
+    Voltar ao início
+  </a>
+</body>
+</html>

@@ -1,0 +1,17 @@
+.git/
+.wrangler/
+.gitignore
+.assetsignore
+wrangler.toml
+tailwind.config.js
+package.json
+package-lock.json
+assets/css/tailwind-input.css
+README.md
+/*.md
+bkp/
+docs/
+fusion/
+node_modules/
+tests/
+C:Temp*

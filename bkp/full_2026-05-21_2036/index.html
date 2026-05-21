@@ -70,7 +70,33 @@
     <!-- Favicon (emoji robô) -->
     <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
 
-    <link rel="stylesheet" href="assets/css/output.css">
+    <!-- Tailwind CDN (apropriado para guia educacional; em produção real, prefira build compilado) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        indigo: {
+                            50:  '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                            950: '#2e1065',
+                        }
+                    }
+                }
+            }
+        };
+    </script>
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
 </head>
@@ -94,12 +120,9 @@
                     <i class="fab fa-linkedin-in" aria-hidden="true"></i>
                 </a>
                 <button id="darkToggle" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-yellow-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" data-i18n-aria="nav.darkMode" aria-label="Alternar modo escuro">
-                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                    <i class="fas fa-moon dark:hidden" aria-hidden="true"></i>
+                    <i class="fas fa-sun hidden dark:inline" aria-hidden="true"></i>
                 </button>
-                <a href="./estudos/" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 h-11 px-4 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 inline-flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-semibold text-sm" data-i18n-aria="nav.platformLink" aria-label="Plataforma de Estudos" title="Plataforma de Estudos">
-                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
-                    <span class="hidden sm:inline" data-i18n="nav.platformLink">Plataforma de Estudos</span>
-                </a>
             </div>
         </div>
     </div>
@@ -174,7 +197,7 @@
         <main class="flex-1 min-w-0">
 
         <!-- Intro & Problem Section -->
-        <section id="passo-0" class="mb-16 scroll-mt-20">
+        <section id="passo-0" class="mb-24 scroll-mt-8">
             <div class="flex items-center gap-4 mb-8">
                 <div class="bg-indigo-100 dark:bg-indigo-900 p-4 rounded-2xl text-indigo-600 dark:text-indigo-300 shadow-sm">
                     <i class="fas fa-rocket text-3xl" aria-hidden="true"></i>
@@ -217,7 +240,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.engTitle">Engenharia</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.engProblem"><strong>Sua dor:</strong> Garantir que projetos sigam centenas de páginas de normas da ABNT e manuais de segurança.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-400 dark:border-blue-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.engSolution"><strong>O Agente:</strong> Auditor de Conformidade que cruza dados da obra com as normas e aponta erros na hora.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-blue-50 dark:bg-slate-700/60 border-l-4 border-blue-400 dark:border-blue-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.engSolution"><strong>O Agente:</strong> Auditor de Conformidade que cruza dados da obra com as normas e aponta erros na hora.</p>
                 </div>
                 <!-- Case Architecture -->
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-teal-500">
@@ -226,7 +249,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.archTitle">Arquitetura</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.archProblem"><strong>Sua dor:</strong> Redigir memoriais descritivos consome horas a partir de pranchas e listas de especificação.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-teal-50 dark:bg-teal-950/30 border-l-4 border-teal-400 dark:border-teal-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.archSolution"><strong>O Agente:</strong> Redator técnico que gera memoriais descritivos automaticamente seguindo a NBR 13532 e o padrão do escritório.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-teal-50 dark:bg-slate-700/60 border-l-4 border-teal-400 dark:border-teal-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.archSolution"><strong>O Agente:</strong> Redator técnico que gera memoriais descritivos automaticamente seguindo a NBR 13532 e o padrão do escritório.</p>
                 </div>
                 <!-- Case Medicine -->
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-rose-500">
@@ -235,7 +258,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.medTitle">Medicina</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.medProblem"><strong>Sua dor:</strong> Revisar prontuários longos antes da consulta toma tempo precioso do médico.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-400 dark:border-rose-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.medSolution"><strong>O Agente:</strong> Especialista clínico que estrutura histórico do paciente em formato SOAP, respeitando LGPD/CFM e com revisão humana obrigatória.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-rose-50 dark:bg-slate-700/60 border-l-4 border-rose-400 dark:border-rose-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.medSolution"><strong>O Agente:</strong> Especialista clínico que estrutura histórico do paciente em formato SOAP, respeitando LGPD/CFM e com revisão humana obrigatória.</p>
 
                 </div>
                 <!-- Case Retail -->
@@ -245,7 +268,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.retailTitle">Comércio</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.retailProblem"><strong>Sua dor:</strong> Horas perdidas respondendo dúvidas idênticas no WhatsApp sobre tamanhos, trocas e frete.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-green-50 dark:bg-green-950/30 border-l-4 border-green-400 dark:border-green-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.retailSolution"><strong>O Agente:</strong> Especialista em atendimento que conhece todo o estoque e a política da loja de cor.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-green-50 dark:bg-slate-700/60 border-l-4 border-green-400 dark:border-green-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.retailSolution"><strong>O Agente:</strong> Especialista em atendimento que conhece todo o estoque e a política da loja de cor.</p>
                 </div>
                 <!-- Case Admin -->
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-purple-500">
@@ -254,7 +277,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.adminTitle">Administrativo</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.adminProblem"><strong>Sua dor:</strong> Caos na gestão de notas e contratos, com vencimentos perdidos em pastas bagunçadas.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-purple-50 dark:bg-purple-950/30 border-l-4 border-purple-400 dark:border-purple-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.adminSolution"><strong>O Agente:</strong> Organizador de fluxo que extrai datas e valores automaticamente para um cronograma.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-purple-50 dark:bg-slate-700/60 border-l-4 border-purple-400 dark:border-purple-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.adminSolution"><strong>O Agente:</strong> Organizador de fluxo que extrai datas e valores automaticamente para um cronograma.</p>
                 </div>
                 <!-- Case Education -->
                 <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-orange-500">
@@ -263,7 +286,7 @@
                         <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.eduTitle">Educação</h3>
                     </div>
                     <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.eduProblem"><strong>Sua dor:</strong> Ter muito conteúdo gravado ou escrito, mas não ter tempo para criar provas e exercícios.</p>
-                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-orange-50 dark:bg-orange-950/30 border-l-4 border-orange-400 dark:border-orange-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.eduSolution"><strong>O Agente:</strong> Designer instrucional que transforma aulas em materiais didáticos estruturados.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-orange-50 dark:bg-slate-700/60 border-l-4 border-orange-400 dark:border-orange-400 p-3 rounded-r-lg font-medium" data-i18n-html="s0.eduSolution"><strong>O Agente:</strong> Designer instrucional que transforma aulas em materiais didáticos estruturados.</p>
                 </div>
             </div>
 
@@ -279,8 +302,8 @@
         </section>
 
         <!-- Vocabulário do Agente -->
-        <section id="vocabulario" class="mb-16 scroll-mt-20">
-            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-8" data-i18n="vocab.title">Vocabulário do Agente</h2>
+        <section id="vocabulario" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8" data-i18n="vocab.title">Vocabulário do Agente</h2>
             <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
                     <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.promptTitle">Prompt</span></p>
@@ -310,8 +333,8 @@
         </section>
 
         <!-- Visual Workflow Section — Timeline zigue-zague -->
-        <section id="mapa" class="mb-16 scroll-mt-20">
-            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-4" data-i18n="map.title">O caminho que você vai percorrer</h2>
+        <section id="mapa" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-4" data-i18n="map.title">O caminho que você vai percorrer</h2>
             <p class="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto" data-i18n="map.subtitle">Sete passos em sequência. Não pule etapas.</p>
 
             <div class="bg-indigo-50 dark:bg-slate-800/50 p-6 md:p-12 rounded-3xl border border-indigo-100 dark:border-slate-700">
@@ -319,7 +342,7 @@
 
                     <!-- Passo 0 -->
                     <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
-                        <div class="timeline-dot" style="background:#4f46e5;">0</div>
+                        <div class="timeline-dot" style="background:#64748b;">0</div>
                         <div class="md:text-right md:pr-12 hidden md:block"></div>
                         <div class="md:pl-12">
                             <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
@@ -439,13 +462,13 @@
         </section>
 
         <!-- Exemplo na prática -->
-        <section id="exemplo" class="mb-16 scroll-mt-20">
-            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-8" data-i18n="example.title">Exemplo na prática, A Lojinha de roupas</h2>
+        <section id="exemplo" class="mb-24 scroll-mt-8">
+            <h2 class="text-2xl font-bold text-center text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-8" data-i18n="example.title">Exemplo na prática, A Lojinha de roupas</h2>
             <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
                 <p class="text-slate-700 dark:text-slate-300 mb-6" data-i18n="example.intro">Pra ficar mais fácil de visualizar, vamos imaginar uma pequena loja de roupas do seu bairro. Veja como cada passo se encaixa no dia a dia dela:</p>
                 <div class="space-y-4">
                     <div class="flex gap-4 items-start">
-                        <span class="bg-slate-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">0</span>
+                        <span class="bg-slate-500 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">0</span>
                         <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step0Label">Dor</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step0Text">"Perco horas do meu dia respondendo as mesmas dúvidas no WhatsApp e ainda assim cliente reclama da demora."</p></div>
 
                     </div>
@@ -481,13 +504,13 @@
         <section class="space-y-16">
 
             <!-- Step 1 -->
-            <div id="passo-1" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-1" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">1</span>
                     </div>
                     <div class="prose-custom max-w-none">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p1.title">Entenda o seu próprio processo</h3>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p1.title">Entenda o seu próprio processo</h3>
                         <p data-i18n-html="p1.body1">O primeiro passo é entender o seu <strong>"chão de fábrica"</strong>. Você não pode ensinar uma IA a fazer algo que você mesmo não consegue explicar como é feito hoje na mão.</p>
                         <p data-i18n="p1.body2">Olhe pro processo atual: onde estão os gargalos? Quais regras você segue (mesmo as que ninguém escreveu)? Quais tarefas são repetitivas e te cansam à toa? Em seguida, liste as ferramentas que você usa (planilhas, e-mails, sites específicos).</p>
 
@@ -543,17 +566,17 @@
             </div>
 
             <!-- Step 2 -->
-            <div id="passo-2" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-2" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">2</span>
                     </div>
                     <div class="prose-custom max-w-none w-full">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p2.title">Desenhe o fluxo do seu agente</h3>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p2.title">Desenhe o fluxo do seu agente</h3>
                         <p data-i18n-html="p2.body1">Com o diagnóstico feito, calma: não vá sair pedindo pra IA criar o agente direto. Antes, converse com ela e peça ajuda pra desenhar a <strong>estrutura</strong> do que vai ser construído.</p>
                         <p data-i18n-html="p2.body2">No <strong>Gemini</strong> (ou em alternativas como <strong>ChatGPT</strong> e <strong>Claude</strong>), cole o que você aprendeu no Passo 1 e peça ajuda pra planejar. Planejar antes vale mais a pena do que sair executando: você visualiza os <strong>"trabalhadores virtuais"</strong> e as <strong>habilidades</strong> que cada um precisa ter, sem desperdiçar energia.</p>
                         <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
-                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copiar</button>
+                            <button class="copy-btn" style="position:absolute;top:0.75rem;right:0.75rem" type="button" data-i18n="ui.copy">Copiar</button>
                             <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p2.codeComment">// Peça assim:</p>
                             <span data-i18n-html="p2.codePrompt">"Com o assunto que descrevi acima, me ajude a planejar um conjunto de agentes. Para cada um, liste as <strong>habilidades</strong> (skills), <strong>ferramentas</strong> (tools) e <strong>gatilhos</strong> (hooks) necessários."</span>
                         </div>
@@ -570,16 +593,16 @@
             </div>
 
             <!-- Step 3 -->
-            <div id="passo-3" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-3" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">3</span>
                     </div>
                     <div class="prose-custom max-w-none">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p3.title">Junte o material de estudo do seu agente</h3>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p3.title">Junte o material de estudo do seu agente</h3>
                         <p data-i18n-html="p3.body1">Um agente só é inteligente se tiver <strong>conteúdo bom pra estudar</strong>. Aqui a pesquisa não é superficial: é hora de investigar o tema a fundo e juntar manuais, leis e padrões reais que regem o seu trabalho.</p>
 
-                        <div class="highlight-box rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-6">
+                        <div class="highlight-box p-8 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-6">
                             <h4 class="font-bold text-indigo-900 dark:text-indigo-200 mb-4 flex items-center gap-2">
                                 <i class="fas fa-microscope" aria-hidden="true"></i> <span data-i18n="p3.howTitle">Como usar o Gemini Deep Research:</span>
                             </h4>
@@ -617,13 +640,13 @@
             </div>
 
             <!-- Step 4 -->
-            <div id="passo-4" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-4" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">4</span>
                     </div>
                     <div class="prose-custom max-w-none">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p4.title">A apostila do seu agente</h3>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p4.title">A apostila do seu agente</h3>
                         <p data-i18n-html="p4.body1">Imagine que a IA é um aluno brilhante, mas que nunca entrou na sua empresa. A <strong>apostila</strong> é o material de estudo personalizado que você entrega pra ele.</p>
                         <p data-i18n-html="p4.body2">Diferente da IA genérica, o seu agente vai ter uma fonte focada nos seus dados. É esse conteúdo que <strong>define como ele atua</strong>: ele responde no seu tom de voz, segue as suas regras e cita as suas fontes. Sem apostila, o agente dá respostas vagas. Com ela, age como alguém experiente da sua equipe.</p>
 
@@ -659,17 +682,17 @@
             </div>
 
             <!-- Step 5 -->
-            <div id="passo-5" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-5" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">5</span>
                     </div>
                     <div class="prose-custom max-w-none w-full">
-                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p5.title">O “contrato” do seu agente</h3>
+                        <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p5.title">O “contrato” do seu agente</h3>
                         <p data-i18n-html="p5.body1">Agora a gente usa o <a href="https://claude.ai" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Claude</a>, o <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">GitHub Copilot</a> ou alternativas como <a href="https://cursor.sh" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Cursor</a> e <a href="https://chatgpt.com" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">ChatGPT</a> (apontando pra pasta da apostila que você criou no Passo 4). Pedimos pra IA ler o material e criar um <strong>contrato</strong> do que vai ser construído.</p>
                         <p data-i18n="p5.body2">O contrato é o documento onde a IA descreve, em palavras simples, exatamente o que ela pretende fazer. É a hora de você ler com calma e dizer: "isso aqui sim, é exatamente o que eu quero" ou "essa regra está errada, muda".</p>
                         <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
-                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copiar</button>
+                            <button class="copy-btn" style="position:absolute;top:0.75rem;right:0.75rem" type="button" data-i18n="ui.copy">Copiar</button>
                             <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p5.codeComment">// Peça assim:</p>
                             <span data-i18n="p5.codePrompt">"Leia os arquivos desta pasta e crie uma especificação detalhada do agente em linguagem natural, descrevendo em palavras simples tudo o que ele deve fazer, suas regras, seu tom de voz e os casos em que deve pedir ajuda humana."</span>
                         </div>
@@ -692,16 +715,16 @@
             </div>
 
             <!-- Step 6 -->
-            <div id="passo-6" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+            <div id="passo-6" class="step-card scroll-mt-8 bg-white dark:bg-slate-800 p-10 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
                 <div class="flex flex-col md:flex-row gap-8">
                     <div class="shrink-0">
                         <span class="bg-green-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">6</span>
                     </div>
                     <div class="prose-custom max-w-none">
-                        <h3 class="text-2xl font-bold text-green-700 dark:text-green-400 mb-6" data-i18n="p6.title">Hora de dar vida ao agente</h3>
+                        <h3 class="text-3xl font-bold text-green-700 dark:text-green-400 mb-6" data-i18n="p6.title">Hora de dar vida ao agente</h3>
                         <p data-i18n="p6.body1">Com o contrato aprovado por você, a parte difícil acabou. Agora é só dar a ordem pra IA "girar a chave".</p>
                         <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
-                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copiar</button>
+                            <button class="copy-btn" style="position:absolute;top:0.75rem;right:0.75rem" type="button" data-i18n="ui.copy">Copiar</button>
                             <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p6.codeComment">// Peça assim:</p>
                             <span data-i18n="p6.codePrompt">"O contrato está perfeito. Agora execute o desenvolvimento do agente conforme planejado."</span>
                         </div>
@@ -738,7 +761,7 @@
         </section>
 
         <!-- Golden Rules Footer -->
-        <footer id="regras" class="mt-16 p-10 bg-indigo-950 text-indigo-100 rounded-[3rem] shadow-2xl overflow-hidden relative scroll-mt-20">
+        <footer id="regras" class="mt-16 p-12 bg-indigo-950 text-indigo-100 rounded-[3rem] shadow-2xl overflow-hidden relative scroll-mt-8">
             <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-900 rounded-full -mr-32 -mt-32 opacity-50" aria-hidden="true"></div>
             <div class="relative z-10">
                 <h2 class="text-4xl font-bold text-white mb-10 text-center" data-i18n="footer.title">4 lembretes pra não esquecer</h2>
