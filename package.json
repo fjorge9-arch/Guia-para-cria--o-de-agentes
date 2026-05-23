@@ -5,10 +5,12 @@
   "scripts": {
     "build:i18n": "node scripts/build-i18n.mjs",
     "build:css": "tailwindcss -i assets/css/tailwind-input.css -o assets/css/output.css --minify",
-    "build": "npm run build:i18n && npm run build:css",
+    "build:critical": "node scripts/build-critical.mjs",
+    "build": "npm run build:css && npm run build:i18n && npm run build:critical",
     "dev": "tailwindcss -i assets/css/tailwind-input.css -o assets/css/output.css --watch"
   },
   "devDependencies": {
+    "critical": "^7.2.1",
     "tailwindcss": "^3.4.0"
   }
 }

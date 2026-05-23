@@ -1,5 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
+/* Override Font Awesome 6 (cdnjs) para adicionar font-display: swap
+   evitando FOIT durante o carregamento inicial dos icones. */
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-solid-900.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Font Awesome 6 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-regular-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Font Awesome 6 Brands';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/webfonts/fa-brands-400.woff2') format('woff2');
+}
+
 /* ============================================================
    TOKENS COMPARTILHADOS (Guia + Plataforma)
    ============================================================ */
@@ -509,6 +533,8 @@ body {
   max-width: 1280px;
   margin: 0 auto;
   padding: 20px 24px 60px;
+  /* Reserva altura inicial para evitar CLS antes da hidratacao do app */
+  min-height: 70vh;
 }
 
 /* Grid */
@@ -960,7 +986,7 @@ input[type="text"]:focus, select:focus {
   .topbar-app-label span { display: none; }
   .topbar-actions { gap: 5px; }
   .floating-header-actions { gap: 5px; }
-  #app { padding: 14px 14px 60px; }
+  #app { padding: 14px 14px 60px; min-height: 80vh; }
   .tabs-inner { padding-top: 8px; padding-bottom: 8px; }
   .tab span { display: none; }
   .tab { padding: 7px 10px; }

@@ -175,15 +175,34 @@ function resetProgress() {
   render();
 }
 
+// ── Lazy-load marked.js (only when a lesson is opened) ────────────
+let _markedPromise = null;
+function ensureMarked() {
+  if (typeof marked !== 'undefined') return Promise.resolve();
+  if (_markedPromise) return _markedPromise;
+  _markedPromise = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = '/assets/js/vendor/marked.min.js';
+    s.defer = true;
+    s.onload = () => resolve();
+    s.onerror = () => { _markedPromise = null; reject(new Error('marked load failed')); };
+    document.head.appendChild(s);
+  });
+  return _markedPromise;
+}
+
 // ── Lesson content loader ─────────────────────────
 async function loadLessonContent(filePath) {
   if (filePath in lessonCache) return; // already fetched (or failed)
   // Encode each path segment (handles spaces, accents, & etc.)
   const encoded = filePath.split('/').map(seg => seg === '..' ? '..' : encodeURIComponent(seg)).join('/');
   try {
+    // Kick off marked load in parallel with the markdown fetch
+    const markedReady = ensureMarked().catch(() => {});
     const res = await fetch(encoded);
     if (!res.ok) throw new Error('HTTP ' + res.status);
     lessonCache[filePath] = await res.text();
+    await markedReady;
   } catch (e) {
     lessonCache[filePath] = null;
   }

@@ -179,6 +179,13 @@ function buildLangHtml(srcHtml, translations, lang) {
     `$1${selfUrl}$2`
   );
 
+  // 11. JSON-LD BreadcrumbList: reescreve "item" da posicao 1 para selfUrl
+  // (BreadcrumbList raiz tem um unico ListItem apontando para "/")
+  html = html.replace(
+    /("item":\s*")https:\/\/desmistificando-ia\.com\/(")/g,
+    `$1${selfUrl}$2`
+  );
+
   return html;
 }
 
