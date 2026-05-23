@@ -6,7 +6,8 @@
     "build:i18n": "node scripts/build-i18n.mjs",
     "build:css": "tailwindcss -i assets/css/tailwind-input.css -o assets/css/output.css --minify",
     "build:critical": "node scripts/build-critical.mjs",
-    "build": "npm run build:css && npm run build:i18n",
+    "build:validate": "node scripts/validate-build.mjs",
+    "build": "npm run build:css && npm run build:i18n && npm run build:validate",
     "build:local": "npm run build && npm run build:critical",
     "dev": "tailwindcss -i assets/css/tailwind-input.css -o assets/css/output.css --watch"
   },

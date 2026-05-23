@@ -20,7 +20,7 @@ function check(file, html) {
   const cssPrefix = isEstudos ? '../assets/css/' : '/assets/css/';
   const jsPrefix  = isEstudos ? '../assets/js/'  : '/assets/js/';
 
-  return {
+  const common = {
     'tem </html>': html.includes('</html>'),
     'tem <style> critico inline': /<style[^>]*>[^<]{100,}<\/style>/.test(html),
     'CSS proprio e sincrono (rel=stylesheet)':
@@ -32,13 +32,28 @@ function check(file, html) {
       new RegExp(`defer src="${jsPrefix.replace(/\//g,'\\/')}i18n\\.js"`).test(html),
     'sem cdn.jsdelivr.net (marked nao e CDN)':
       !html.includes('cdn.jsdelivr.net'),
-    'hreflang presente':
-      html.includes('hreflang='),
     'canonical presente':
       html.includes('rel="canonical"'),
-    'JSON-LD Article presente':
-      html.includes('"@type": "Article"'),
   };
+
+  // Checks especificos por tipo de pagina
+  const specific = isEstudos
+    ? {
+        'JSON-LD LearningResource presente':
+          html.includes('"LearningResource"'),
+        'JSON-LD BreadcrumbList presente':
+          html.includes('"BreadcrumbList"'),
+        // estudos e PT-only: sem hreflang e sem Article
+      }
+    : {
+        'hreflang presente': html.includes('hreflang='),
+        'JSON-LD Article presente': html.includes('"@type": "Article"'),
+        'JSON-LD BreadcrumbList presente': html.includes('"BreadcrumbList"'),
+        'CSS Tailwind (output.css) sincrono':
+          html.includes('href="/assets/css/output.css"'),
+      };
+
+  return { ...common, ...specific };
 }
 
 let allOk = true;
