@@ -151,13 +151,11 @@
     <!-- Favicon (emoji robô) -->
     <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
 
-    <!-- CSS proprio: nao-bloqueante (preload+onload) com fallback noscript -->
-    <link rel="preload" as="style" href="/assets/css/output.css" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" as="style" href="/assets/css/styles.css" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="/assets/css/output.css">
-        <link rel="stylesheet" href="/assets/css/styles.css">
-    </noscript>
+    <!-- CSS proprio: preload hint (inicia download cedo) + link sincrono (sem FOUC/CLS no desktop) -->
+    <link rel="preload" as="style" href="/assets/css/output.css">
+    <link rel="preload" as="style" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/output.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 
     <!-- Font Awesome carregado de forma nao-bloqueante (LCP) -->
     <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
