@@ -13,6 +13,12 @@
     <meta name="keywords" content="agente de IA, criar agente de IA, guia agente IA, inteligencia artificial sem programar, automacao com IA, primeiro agente, AI agent, no-code IA">
     <link rel="canonical" href="https://desmistificando-ia.com/">
 
+    <!-- hreflang: URLs reais por idioma -->
+    <link rel="alternate" hreflang="pt-BR" href="https://desmistificando-ia.com/">
+    <link rel="alternate" hreflang="en" href="https://desmistificando-ia.com/en/">
+    <link rel="alternate" hreflang="es" href="https://desmistificando-ia.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://desmistificando-ia.com/">
+
     <!-- Open Graph -->
     <meta property="og:type" content="article">
     <meta property="og:url" content="https://desmistificando-ia.com/">
@@ -67,12 +73,92 @@
         }
     </script>
 
-    <!-- Favicon (emoji robô) -->
-    <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "O que é um agente de IA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Um agente de IA é um assistente digital que executa tarefas seguindo instruções claras (um contrato), apoiado por material de referência. Pense nele como um estagiário que trabalha 24h sem cansar, desde que você defina bem o que ele deve e não deve fazer."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Preciso saber programar para criar um agente de IA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Não. Este guia é feito para pessoas sem formação técnica. Você descreve o problema, o processo e as regras em linguagem natural; a IA cuida do resto. Não há código envolvido nas 7 etapas."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto custa criar meu primeiro agente?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Você pode começar gratuitamente usando versões free das principais plataformas de IA (ChatGPT, Claude, Gemini). Para uso intensivo ou integrações avançadas, planos pagos começam em torno de US$ 20/mês."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Por onde devo começar?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Comece pelo Passo 0: identifique uma dor real do seu dia a dia, uma tarefa repetitiva que te incomoda. Sem problema concreto, o agente não tem propósito. Depois siga as 7 etapas do guia em ordem."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Qual a diferença entre um agente e um chatbot?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Um chatbot apenas responde perguntas. Um agente segue um processo, consulta material de referência e produz um resultado útil (relatório, análise, resumo, decisão) seguindo regras que você define. Agente tem objetivo e contrato; chatbot só conversa."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto tempo leva para criar meu primeiro agente?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Seguindo o guia, entre 2 e 6 horas para o primeiro agente funcional, dependendo da complexidade do problema escolhido. A maior parte do tempo é de pensamento e organização, não de uso de ferramenta."
+                    }
+                }
+            ]
+        }
+    </script>
 
-    <link rel="stylesheet" href="assets/css/output.css">
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Início",
+                    "item": "https://desmistificando-ia.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Guia: Seu Primeiro Agente de IA",
+                    "item": "https://desmistificando-ia.com/"
+                }
+            ]
+        }
+    </script>
+
+    <!-- Favicon (emoji robô) -->
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="/assets/css/output.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
 </head>
 <body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 leading-relaxed transition-colors">
 
@@ -96,7 +182,7 @@
                 <button id="darkToggle" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-yellow-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" data-i18n-aria="nav.darkMode" aria-label="Alternar modo escuro">
                     <i class="fa-solid fa-moon" aria-hidden="true"></i>
                 </button>
-                <a href="./estudos/" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 h-11 px-4 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 inline-flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-semibold text-sm" data-i18n-aria="nav.platformLink" aria-label="Plataforma de Estudos" title="Plataforma de Estudos">
+                <a href="/estudos/" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 h-11 px-4 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 inline-flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-semibold text-sm" data-i18n-aria="nav.platformLink" aria-label="Plataforma de Estudos" title="Plataforma de Estudos">
                     <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                     <span class="hidden sm:inline" data-i18n="nav.platformLink">Plataforma de Estudos</span>
                 </a>
@@ -785,7 +871,7 @@
                         <p class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6 text-center" data-i18n="footer.developedBy">Desenvolvido por</p>
                         <div class="flex flex-col sm:flex-row items-center gap-6">
                             <a href="https://www.linkedin.com/in/fernandojorge/" target="_blank" rel="noopener" class="shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-indigo-900" data-i18n-aria="footer.authorLinkedinAriaLabel" aria-label="Perfil de Fernando Jorge da Silva no LinkedIn" title="Ver perfil no LinkedIn">
-                                <img src="assets/images/autor.jpg" alt="Foto de Fernando Jorge da Silva" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-400/60 shadow-md hover:border-indigo-300 hover:scale-105 transition-all" loading="lazy">
+                                <img src="/assets/images/autor.jpg" alt="Foto de Fernando Jorge da Silva" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-400/60 shadow-md hover:border-indigo-300 hover:scale-105 transition-all" loading="lazy">
                             </a>
                             <div class="flex-1 text-center sm:text-left">
                                 <h3 class="text-2xl font-bold text-white mb-3">Fernando Jorge da Silva</h3>
@@ -820,8 +906,8 @@
         </div>
     </div>
 
-    <script src="assets/js/i18n.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/i18n.js"></script>
+    <script src="/assets/js/main.js"></script>
 
 </body>
 </html>

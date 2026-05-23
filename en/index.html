@@ -1,0 +1,908 @@
+﻿<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your First AI Agent, No Mystery</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Learn how to build your first AI agent from scratch, even if you are not in tech and do not know how to code. A simple 7-step guide that takes you from zero to a finished agent, starting from a real problem in your day-to-day work.">
+    <meta name="author" content="Fernando Jorge">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#6d28d9">
+    <meta name="keywords" content="agente de IA, criar agente de IA, guia agente IA, inteligencia artificial sem programar, automacao com IA, primeiro agente, AI agent, no-code IA">
+    <link rel="canonical" href="https://desmistificando-ia.com/en/">
+
+    <!-- hreflang: URLs reais por idioma -->
+    <link rel="alternate" hreflang="pt-BR" href="https://desmistificando-ia.com/">
+    <link rel="alternate" hreflang="en" href="https://desmistificando-ia.com/en/">
+    <link rel="alternate" hreflang="es" href="https://desmistificando-ia.com/es/">
+    <link rel="alternate" hreflang="x-default" href="https://desmistificando-ia.com/">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://desmistificando-ia.com/en/">
+    <meta property="og:site_name" content="Desmistificando IA">
+    <meta property="og:title" content="Your First AI Agent, No Mystery">
+    <meta property="og:description" content="Learn how to build your first AI agent from scratch, even if you are not in tech and do not know how to code. A simple 7-step guide that takes you from zero to a finished agent, starting from a real problem in your day-to-day work.">
+    <meta property="og:image" content="https://desmistificando-ia.com/assets/images/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="pt_BR">
+    <meta property="og:locale:alternate" content="es_419">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Your First AI Agent, No Mystery">
+    <meta name="twitter:description" content="Learn how to build your first AI agent from scratch, even if you are not in tech and do not know how to code. A simple 7-step guide that takes you from zero to a finished agent, starting from a real problem in your day-to-day work.">
+    <meta name="twitter:image" content="https://desmistificando-ia.com/assets/images/og-image.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Article",
+            "headline": "Seu Primeiro Agente de IA, Sem Mistério",
+            "description": "Um guia pratico em 7 etapas para criar seu primeiro agente de IA do zero, mesmo sem saber programar, partindo de um problema real do dia a dia.",
+            "url": "https://desmistificando-ia.com/en/",
+            "image": "https://desmistificando-ia.com/assets/images/og-image.png",
+            "inLanguage": ["pt-BR", "en-US", "es-419"],
+            "author": {
+                "@type": "Person",
+                "name": "Fernando Jorge",
+                "url": "https://www.linkedin.com/in/fernandojorge/"
+            },
+            "publisher": {
+                "@type": "Person",
+                "name": "Fernando Jorge",
+                "url": "https://www.linkedin.com/in/fernandojorge/"
+            },
+            "datePublished": "2026-01-01",
+            "dateModified": "2026-05-02",
+            "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": "https://desmistificando-ia.com/en/"
+            },
+            "about": {
+                "@type": "Thing",
+                "name": "Agentes de Inteligencia Artificial"
+            },
+            "educationalLevel": "Beginner",
+            "teaches": "Como criar um agente de IA do zero sem programar"
+        }
+    </script>
+
+    <!-- Structured Data: FAQ -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "O que é um agente de IA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Um agente de IA é um assistente digital que executa tarefas seguindo instruções claras (um contrato), apoiado por material de referência. Pense nele como um estagiário que trabalha 24h sem cansar, desde que você defina bem o que ele deve e não deve fazer."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Preciso saber programar para criar um agente de IA?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Não. Este guia é feito para pessoas sem formação técnica. Você descreve o problema, o processo e as regras em linguagem natural; a IA cuida do resto. Não há código envolvido nas 7 etapas."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto custa criar meu primeiro agente?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Você pode começar gratuitamente usando versões free das principais plataformas de IA (ChatGPT, Claude, Gemini). Para uso intensivo ou integrações avançadas, planos pagos começam em torno de US$ 20/mês."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Por onde devo começar?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Comece pelo Passo 0: identifique uma dor real do seu dia a dia, uma tarefa repetitiva que te incomoda. Sem problema concreto, o agente não tem propósito. Depois siga as 7 etapas do guia em ordem."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Qual a diferença entre um agente e um chatbot?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Um chatbot apenas responde perguntas. Um agente segue um processo, consulta material de referência e produz um resultado útil (relatório, análise, resumo, decisão) seguindo regras que você define. Agente tem objetivo e contrato; chatbot só conversa."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "Quanto tempo leva para criar meu primeiro agente?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Seguindo o guia, entre 2 e 6 horas para o primeiro agente funcional, dependendo da complexidade do problema escolhido. A maior parte do tempo é de pensamento e organização, não de uso de ferramenta."
+                    }
+                }
+            ]
+        }
+    </script>
+
+    <!-- Structured Data: Breadcrumb -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Início",
+                    "item": "https://desmistificando-ia.com/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "Guia: Seu Primeiro Agente de IA",
+                    "item": "https://desmistificando-ia.com/"
+                }
+            ]
+        }
+    </script>
+
+    <!-- Favicon (emoji robô) -->
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+
+    <link rel="stylesheet" href="/assets/css/output.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-200 leading-relaxed transition-colors">
+
+    <!-- Top toolbar -->
+    <div class="fixed top-4 inset-x-0 z-50 pointer-events-none">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center gap-2">
+            <!-- Language switcher -->
+            <div class="lang-switcher pointer-events-auto flex items-center gap-1">
+                <button data-lang="pt" class="lang-btn" aria-label="Português">PT</button>
+                <button data-lang="en" class="lang-btn" aria-label="English">EN</button>
+                <button data-lang="es" class="lang-btn" aria-label="Español">ES</button>
+            </div>
+            <!-- Right buttons -->
+            <div class="flex items-center gap-2">
+                <button id="tocToggleMobile" class="pointer-events-auto md:hidden bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" data-i18n-aria="nav.openToc" aria-label="Open index">
+                    <i class="fas fa-list" aria-hidden="true"></i>
+                </button>
+                <a href="https://www.linkedin.com/in/fernandojorge/" target="_blank" rel="noopener" class="pointer-events-auto bg-white dark:bg-slate-800 text-[#0a66c2] dark:text-[#70b5f9] w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors" data-i18n-aria="nav.linkedinAriaLabel" aria-label="Author profile on LinkedIn" title="LinkedIn do autor">
+                    <i class="fab fa-linkedin-in" aria-hidden="true"></i>
+                </a>
+                <button id="darkToggle" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-yellow-300 w-11 h-11 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 flex items-center justify-center" data-i18n-aria="nav.darkMode" aria-label="Toggle dark mode">
+                    <i class="fa-solid fa-moon" aria-hidden="true"></i>
+                </button>
+                <a href="/estudos/" class="pointer-events-auto bg-white dark:bg-slate-800 text-indigo-700 dark:text-indigo-300 h-11 px-4 rounded-full shadow-lg border border-slate-200 dark:border-slate-700 inline-flex items-center gap-2 hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors font-semibold text-sm" data-i18n-aria="nav.platformLink" aria-label="Study Platform" title="Plataforma de Estudos">
+                    <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                    <span class="hidden sm:inline" data-i18n="nav.platformLink">Study Platform</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="bg-indigo-700 dark:bg-indigo-900 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-6 py-16 md:flex md:gap-10">
+            <!-- Coluna esquerda: título desktop -->
+            <div class="hidden md:flex md:w-64 shrink-0 items-start pt-1">
+                <h1 class="hero-title-desktop text-[40px] font-bold leading-tight" data-i18n-html="hero.titleDesktop">Your<br>First<br>AI Agent<br>No Mystery</h1>
+            </div>
+            <!-- Coluna direita: subtítulo + badge -->
+            <div class="flex-1 min-w-0 flex flex-col justify-center gap-8">
+                <h1 class="md:hidden text-3xl font-bold leading-snug" data-i18n="hero.titleMobile">Your First AI Agent, No Mystery</h1>
+                <p class="text-lg md:text-xl text-indigo-100 font-light leading-relaxed" data-i18n-html="hero.p1">That task that drains you every single day can be handled by an AI agent, and you can build it yourself. No coding required, no technical background required.</p>
+                <p class="text-lg md:text-xl text-indigo-100 font-light leading-relaxed" data-i18n-html="hero.p2">You only need a real problem and the willingness to follow the steps. The rest you <strong class="text-white font-semibold">learn by doing</strong>.</p>
+                <div>
+                    <span class="inline-block bg-white text-indigo-700 px-8 py-3 rounded-full font-bold text-sm uppercase tracking-widest shadow-xl" data-i18n="hero.badge">A practical guide from zero to your first agent!</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Layout: Sidebar TOC + Main -->
+    <div class="max-w-7xl mx-auto px-6 py-16 md:flex md:gap-10">
+
+        <!-- TOC Sidebar -->
+        <aside id="toc" class="hidden md:block md:w-64 shrink-0">
+            <nav class="sticky top-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 p-5 shadow-sm">
+                <p class="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider mb-3" data-i18n="toc.indexLabel">Índice</p>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#passo-0" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step0">0. Start with your pain</a></li>
+                    <li><a href="#vocabulario" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.vocab">Vocabulary</a></li>
+                    <li><a href="#mapa" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.map">The path you will follow</a></li>
+                    <li><a href="#exemplo" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.example">Real-world example</a></li>
+                    <li><a href="#passo-1" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step1">1. Understand your process</a></li>
+                    <li><a href="#passo-2" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step2">2. Sketch it on paper</a></li>
+                    <li><a href="#passo-3" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step3">3. Gather the material</a></li>
+                    <li><a href="#passo-4" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step4">4. The study guide</a></li>
+                    <li><a href="#passo-5" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step5">5. The contract</a></li>
+                    <li><a href="#passo-6" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step6">6. Bring the agent to life</a></li>
+                    <li><a href="#regras" class="toc-link block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.final">Final reminders</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Mobile TOC drawer -->
+        <div id="tocMobile" class="md:hidden fixed inset-0 bg-black/50 z-40 hidden" role="dialog" aria-modal="true">
+            <nav class="absolute right-0 top-0 h-full w-72 bg-white dark:bg-slate-800 p-6 shadow-2xl overflow-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <p class="text-xs font-bold text-slate-400 uppercase tracking-wider" data-i18n="toc.indexLabel">Índice</p>
+                    <button id="tocCloseMobile" data-i18n-aria="nav.closeToc" aria-label="Close index" class="text-slate-500 dark:text-slate-300"><i class="fas fa-times" aria-hidden="true"></i></button>
+                </div>
+                <ul class="space-y-1 text-sm">
+                    <li><a href="#passo-0" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step0">0. Start with your pain</a></li>
+                    <li><a href="#vocabulario" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.vocab">Vocabulary</a></li>
+                    <li><a href="#mapa" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.map">The path you will follow</a></li>
+                    <li><a href="#exemplo" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.example">Real-world example</a></li>
+                    <li><a href="#passo-1" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step1">1. Understand your process</a></li>
+                    <li><a href="#passo-2" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step2">2. Sketch it on paper</a></li>
+                    <li><a href="#passo-3" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step3">3. Gather the material</a></li>
+                    <li><a href="#passo-4" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step4">4. The study guide</a></li>
+                    <li><a href="#passo-5" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step5">5. The contract</a></li>
+                    <li><a href="#passo-6" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.step6">6. Bring the agent to life</a></li>
+                    <li><a href="#regras" class="block px-3 py-2 rounded-lg text-slate-700 dark:text-slate-300 hover:bg-indigo-50 dark:hover:bg-slate-700" data-i18n="toc.final">Final reminders</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <main class="flex-1 min-w-0">
+
+        <!-- Intro & Problem Section -->
+        <section id="passo-0" class="mb-16 scroll-mt-20">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="bg-indigo-100 dark:bg-indigo-900 p-4 rounded-2xl text-indigo-600 dark:text-indigo-300 shadow-sm">
+                    <i class="fas fa-rocket text-3xl" aria-hidden="true"></i>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white" data-i18n="s0.title">0. The starting point: start with your pain</h2>
+            </div>
+
+            <div class="prose-custom max-w-none text-lg mb-8">
+                <p data-i18n="s0.p1">Nobody builds an AI agent just because the technology is cool. We build one because something hurts: a problem that must be solved, a repetitive task that is exhausting, a report nobody can stand reading, or a process that breaks because it depends on one person's memory.</p>
+                <p data-i18n="s0.p2">Before you open any tool, ask yourself three simple questions to decide whether creating this agent is worth it:</p>
+            </div>
+
+            <div class="grid sm:grid-cols-3 gap-4 mb-10">
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2" data-i18n="s0.q1Label">Question 1</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1" data-i18n="s0.q1Title">What is bothering you?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="s0.q1Desc">Describe the problem in one sentence. If you cannot, it is not clear enough yet.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2" data-i18n="s0.q2Label">Question 2</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1" data-i18n="s0.q2Title">Who is affected by it?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="s0.q2Desc">You, your team, your customers? Knowing who feels the pain sets the tone and success criteria for the agent.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-2xl border border-slate-200 dark:border-slate-700">
+                    <p class="text-xs font-bold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2" data-i18n="s0.q3Label">Question 3</p>
+                    <p class="font-bold text-slate-900 dark:text-white mb-1" data-i18n="s0.q3Title">How much is it costing you today?</p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="s0.q3Desc">In time, money, or patience. This number will help you measure gains later.</p>
+                </div>
+            </div>
+
+            <div class="prose-custom max-w-none text-lg mb-10">
+                <p data-i18n-html="s0.p3">Think of your agent as a <strong>"digital intern"</strong>. What would it do if it could work 24/7 without getting tired? Here are examples of real problems by field that you can start solving today:</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Case Engineering -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-blue-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-hard-hat text-blue-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.engTitle">Engineering</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.engProblem"><strong>Your pain:</strong> Ensuring projects comply with hundreds of pages of technical and safety standards.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-blue-50 dark:bg-blue-950/30 border-l-4 border-blue-400 dark:border-blue-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.engSolution"><strong>The Agent:</strong> A Compliance Auditor that cross-checks project data against applicable standards and flags issues immediately.</p>
+                </div>
+                <!-- Case Architecture -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-teal-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-drafting-compass text-teal-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.archTitle">Architecture</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.archProblem"><strong>Your pain:</strong> Writing descriptive technical reports from plans and specification sheets takes hours.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-teal-50 dark:bg-teal-950/30 border-l-4 border-teal-400 dark:border-teal-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.archSolution"><strong>The Agent:</strong> A technical writer that automatically drafts project descriptions using your firm's standard format and local requirements.</p>
+                </div>
+                <!-- Case Medicine -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-rose-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-stethoscope text-rose-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.medTitle">Medicine</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.medProblem"><strong>Your pain:</strong> Reviewing long patient records before appointments consumes valuable clinical time.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-rose-50 dark:bg-rose-950/30 border-l-4 border-rose-400 dark:border-rose-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.medSolution"><strong>The Agent:</strong> A clinical assistant that structures patient history in SOAP format, following local privacy and medical-board rules with mandatory human review.</p>
+
+                </div>
+                <!-- Case Retail -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-green-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-shopping-cart text-green-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.retailTitle">Small Retail</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.retailProblem"><strong>Your pain:</strong> Hours lost answering the same WhatsApp questions about sizing, returns, and shipping.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-green-50 dark:bg-green-950/30 border-l-4 border-green-400 dark:border-green-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.retailSolution"><strong>The Agent:</strong> A customer support specialist that knows your inventory and store policy inside out.</p>
+                </div>
+                <!-- Case Admin -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-purple-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-file-invoice text-purple-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.adminTitle">Administration</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.adminProblem"><strong>Your pain:</strong> Chaos in invoice and contract management, with due dates lost in messy folders.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-purple-50 dark:bg-purple-950/30 border-l-4 border-purple-400 dark:border-purple-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.adminSolution"><strong>The Agent:</strong> A workflow organizer that automatically extracts dates and amounts into a clear schedule.</p>
+                </div>
+                <!-- Case Education -->
+                <div class="bg-white dark:bg-slate-800 p-8 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm border-t-8 border-t-orange-500">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-graduation-cap text-orange-600 text-2xl" aria-hidden="true"></i>
+                        <h3 class="font-bold text-xl text-slate-900 dark:text-white" data-i18n="s0.eduTitle">Education</h3>
+                    </div>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-3" data-i18n-html="s0.eduProblem"><strong>Your pain:</strong> Having lots of recorded or written content but no time to create assessments and practice activities.</p>
+                    <p class="text-sm text-slate-700 dark:text-slate-200 bg-orange-50 dark:bg-orange-950/30 border-l-4 border-orange-400 dark:border-orange-500 p-3 rounded-r-lg font-medium" data-i18n-html="s0.eduSolution"><strong>The Agent:</strong> An instructional designer that turns lessons into structured teaching materials.</p>
+                </div>
+            </div>
+
+            <!-- Checklist -->
+            <div class="mt-10 bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl shadow-sm">
+                <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="s0.checklistTitle">✅ Before moving to Step 1</p>
+                <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                    <li data-i18n-html="s0.check1">You can describe the pain in <strong>one single sentence</strong>.</li>
+                    <li data-i18n-html="s0.check2">You know <strong>who is affected</strong> by this pain (who will use the agent).</li>
+                    <li data-i18n-html="s0.check3">You have an estimate of the <strong>current cost</strong> (time, money, patience).</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Vocabulário do Agente -->
+        <section id="vocabulario" class="mb-16 scroll-mt-20">
+            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-8" data-i18n="vocab.title">Agent Vocabulary</h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.promptTitle">Prompt</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.promptDesc">The instruction you give to the agent. The clearer it is, the better the answer.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.specTitle">Specification</span> <span class="text-slate-400 dark:text-slate-500 font-normal text-sm" data-i18n="vocab.specTag">(Spec)</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.specDesc">The &quot;contract&quot; that explains what the agent does, in plain language.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.skillTitle">Skill</span> <span class="text-slate-400 dark:text-slate-500 font-normal text-sm" data-i18n="vocab.skillTag">(Skill)</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.skillDesc">Each thing the agent knows how to do. For example: &quot;write emails&quot;, &quot;review spreadsheets&quot;.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.hookTitle">Trigger</span> <span class="text-slate-400 dark:text-slate-500 font-normal text-sm" data-i18n="vocab.hookTag">(Hook)</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.hookDesc">A rule like &quot;whenever X happens, do Y&quot;.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.toolTitle">Tool</span> <span class="text-slate-400 dark:text-slate-500 font-normal text-sm" data-i18n="vocab.toolTag">(Tool)</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.toolDesc">Something external the agent can use: an app, a spreadsheet, or a company system.</p>
+                </div>
+                <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <p class="font-bold text-indigo-700 dark:text-indigo-300 mb-1"><span data-i18n="vocab.mdTitle">Markdown</span> <span class="text-slate-400 dark:text-slate-500 font-normal text-sm" data-i18n="vocab.mdTag">(.md)</span></p>
+                    <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="vocab.mdDesc">A plain-text file format that both people and AI can read easily.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Workflow Section — Timeline zigue-zague -->
+        <section id="mapa" class="mb-16 scroll-mt-20">
+            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-4" data-i18n="map.title">The path you will follow</h2>
+            <p class="text-center text-slate-600 dark:text-slate-400 mb-12 max-w-2xl mx-auto" data-i18n="map.subtitle">Seven steps in sequence. Each step builds on the previous one. Do not skip stages.</p>
+
+            <div class="bg-indigo-50 dark:bg-slate-800/50 p-6 md:p-12 rounded-3xl border border-indigo-100 dark:border-slate-700">
+                <ol class="timeline space-y-10 md:space-y-16 pl-16 md:pl-0">
+
+                    <!-- Passo 0 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">0</div>
+                        <div class="md:text-right md:pr-12 hidden md:block"></div>
+                        <div class="md:pl-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fas fa-bullseye text-slate-500" aria-hidden="true"></i>
+                                    <p class="font-bold text-slate-900 dark:text-white" data-i18n="map.step0Title">Start with your pain</p>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step0Desc">Identify a real day-to-day problem. Without that, there is no agent.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Passo 1 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">1</div>
+                        <div class="md:text-right md:pr-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2 md:justify-end">
+                                    <p class="font-bold text-slate-900 dark:text-white md:order-2" data-i18n="map.step1Title">Understand your own process</p>
+                                    <i class="fas fa-magnifying-glass text-indigo-500 md:order-1" aria-hidden="true"></i>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step1Desc">Map how you solve this pain today: rules, tools, and bottlenecks.</p>
+                            </div>
+                        </div>
+                        <div class="md:pl-12 hidden md:block"></div>
+                    </li>
+
+                    <!-- Passo 2 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">2</div>
+                        <div class="md:text-right md:pr-12 hidden md:block"></div>
+                        <div class="md:pl-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fas fa-pencil-ruler text-indigo-500" aria-hidden="true"></i>
+                                    <p class="font-bold text-slate-900 dark:text-white" data-i18n="map.step2Title">Sketch your agent workflow</p>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step2Desc">List what it can do, what it uses, when it acts by itself, and the sequence of tasks.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Passo 3 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">3</div>
+                        <div class="md:text-right md:pr-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2 md:justify-end">
+                                    <p class="font-bold text-slate-900 dark:text-white md:order-2" data-i18n="map.step3Title">Gather study material</p>
+                                    <i class="fas fa-book text-indigo-500 md:order-1" aria-hidden="true"></i>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step3Desc">Research standards, manuals, and best practices. This becomes the agent's study guide.</p>
+                            </div>
+                        </div>
+                        <div class="md:pl-12 hidden md:block"></div>
+                    </li>
+
+                    <!-- Passo 4 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">4</div>
+                        <div class="md:text-right md:pr-12 hidden md:block"></div>
+                        <div class="md:pl-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fas fa-brain text-indigo-500" aria-hidden="true"></i>
+                                    <p class="font-bold text-slate-900 dark:text-white" data-i18n="map.step4Title">Your agent's study guide</p>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step4Desc">Organize everything in one folder with text files. That is the agent's brain.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Passo 5 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#4f46e5;">5</div>
+                        <div class="md:text-right md:pr-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                                <div class="flex items-center gap-2 mb-2 md:justify-end">
+                                    <p class="font-bold text-slate-900 dark:text-white md:order-2" data-i18n="map.step5Title">Your agent's &quot;contract&quot;</p>
+                                    <i class="fas fa-file-signature text-indigo-500 md:order-1" aria-hidden="true"></i>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step5Desc">The AI describes what it intends to build, and you approve it item by item.</p>
+                            </div>
+                        </div>
+                        <div class="md:pl-12 hidden md:block"></div>
+                    </li>
+
+                    <!-- Passo 6 -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:#16a34a;">6</div>
+                        <div class="md:text-right md:pr-12 hidden md:block"></div>
+                        <div class="md:pl-12">
+                            <div class="bg-white dark:bg-slate-800 p-5 rounded-xl border-2 border-green-500 dark:border-green-600 shadow-md">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <i class="fas fa-rocket text-green-600" aria-hidden="true"></i>
+                                    <p class="font-bold text-slate-900 dark:text-white" data-i18n="map.step6Title">Time to bring the agent to life</p>
+                                </div>
+                                <p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="map.step6Desc">With the contract ready, ask the AI to execute. This is where your agent is born.</p>
+                            </div>
+                        </div>
+                    </li>
+
+                    <!-- Final / Resultado -->
+                    <li class="timeline-item md:grid md:grid-cols-2 md:gap-16 items-center">
+                        <div class="timeline-dot" style="background:linear-gradient(135deg,#16a34a,#059669);"><i class="fas fa-trophy" aria-hidden="true"></i></div>
+                        <div class="md:text-right md:pr-12">
+                            <div class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/40 dark:to-emerald-950/40 p-5 rounded-xl border-2 border-green-300 dark:border-green-700 shadow-md">
+                                <p class="font-bold text-green-900 dark:text-green-200 mb-1" data-i18n="map.resultTitle">Your agent is running!</p>
+                                <p class="text-sm text-green-800 dark:text-green-300" data-i18n="map.resultDesc">Solving the pain that was bothering you back in Step 0. Best of all: you built it yourself.</p>
+                            </div>
+                        </div>
+                        <div class="md:pl-12 hidden md:block"></div>
+                    </li>
+
+                </ol>
+            </div>
+        </section>
+
+        <!-- Exemplo na prática -->
+        <section id="exemplo" class="mb-16 scroll-mt-20">
+            <h2 class="text-2xl font-bold text-center text-slate-600 dark:text-slate-400 uppercase tracking-widest mb-8" data-i18n="example.title">Real-world example: the small clothing store</h2>
+            <div class="bg-white dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                <p class="text-slate-700 dark:text-slate-300 mb-6" data-i18n="example.intro">To make this easier to picture, imagine a small clothing shop in your neighborhood. Here is how each step fits into its daily routine:</p>
+                <div class="space-y-4">
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-slate-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">0</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step0Label">Pain</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step0Text">&quot;I lose hours every day answering the same WhatsApp questions, and customers still complain that we are too slow.&quot;</p></div>
+
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">1</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step1Label">Understand the process</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step1Text">List of the 20 most frequent questions (sizes, shipping, returns, payment methods) and the current average response time.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">2</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step2Label">Sketch the flow</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n-html="example.step2Text"><strong>What it can do:</strong> check size chart, calculate shipping by ZIP code, explain return policy. <strong>What it uses:</strong> inventory spreadsheet. <strong>When it acts alone:</strong> as soon as a new WhatsApp message arrives.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">3</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step3Label">Gather material</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step3Text">A report on customer-service best practices for fashion e-commerce plus a local consumer-protection checklist for returns.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">4</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step4Label">The study guide</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n-html="example.step4Text">Folder with: <code>return-policy.md</code>, <code>size-chart.md</code>, <code>faq.md</code>, <code>tone-of-voice.md</code>.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-indigo-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">5</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step5Label">The contract</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step5Text">Description: persona, friendly tone, always confirm size before shipment, hand off to a human agent when the customer asks for a discount.</p></div>
+                    </div>
+                    <div class="flex gap-4 items-start">
+                        <span class="bg-green-600 text-white w-9 h-9 rounded-lg flex items-center justify-center shrink-0 font-bold text-sm">6</span>
+                        <div><p class="font-semibold text-slate-900 dark:text-white" data-i18n="example.step6Label">Bring the agent to life</p><p class="text-sm text-slate-600 dark:text-slate-400" data-i18n="example.step6Text">Agent in production, answering 80% of questions in seconds, with weekly transcript reviews to improve the study guide.</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Steps -->
+        <section class="space-y-16">
+
+            <!-- Step 1 -->
+            <div id="passo-1" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">1</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p1.title">Understand your own process</h3>
+                        <p data-i18n-html="p1.body1">The first step is understanding your <strong>"shop floor"</strong>. You cannot teach AI to do something you cannot explain how to do manually today.</p>
+                        <p data-i18n="p1.body2">Look at your current process: where are the bottlenecks? Which rules do you follow (including unwritten ones)? Which tasks are repetitive and drain your energy for no reason? Then list the tools you already use (spreadsheets, email, specific websites).</p>
+
+                        <p class="border-l-4 border-indigo-400 pl-5 py-3 pr-5 text-indigo-700 dark:text-indigo-300 italic mt-6 bg-indigo-50 dark:bg-indigo-950/40 rounded-r-2xl" data-i18n="p1.quote">Thinking through this and writing it down is already a great start: you will see your process in a way you may never have seen before.</p>
+
+                        <div class="bg-indigo-50 dark:bg-slate-900/60 p-8 rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-8">
+                            <h4 class="font-bold text-indigo-900 dark:text-indigo-200 mb-4 flex items-center gap-2">
+                                <i class="fas fa-search" aria-hidden="true"></i> <span data-i18n="p1.tipTitle">Tip: investigate the problem with Deep Research</span>
+                            </h4>
+                            <p class="text-sm text-indigo-800 dark:text-indigo-300 mb-4" data-i18n-html="p1.tipBody">You know there is a problem, but you may not know the <strong>best practices</strong> to solve it yet. Use <strong>Gemini Deep Research</strong> now to learn the topic before planning your agent.</p>
+
+                            <p class="text-xs font-bold text-indigo-700 dark:text-indigo-300 uppercase mb-3" data-i18n="p1.promptsLabel">Prompt examples to get started:</p>
+
+                            <div class="space-y-4">
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptEng">"Investigate the main causes of non-compliance in civil construction projects and identify which local structural and worker-safety standards are most critical."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptArch">"Research the standard structure of an architectural descriptive report, including required sections, technical vocabulary, and common writing mistakes."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptMed">"Investigate best practices for summarizing electronic health records in SOAP format, considering local data-privacy and medical-governance requirements."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptRetail">"Research best practices in customer support for fashion e-commerce and identify the 20 most common questions from online apparel shoppers."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptAdmin">"Analyze accounts payable and receivable workflows in small businesses and identify the most common human errors when processing invoices and contracts."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                                <div class="prompt-example">
+                                    <span class="flex-1" data-i18n-html="p1.promptEdu">"Research effective instructional-design methods for converting video lesson scripts into support materials that improve student retention."</span><button class="copy-btn" type="button" data-i18n="ui.copy">Copy</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0" data-i18n="p1.alertTitle">💡 Important tip:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2" data-i18n-html="p1.alertBody">You need to understand the basics of the topic. If you do not know what the agent should deliver, you cannot tell whether it is working or just <strong>"hallucinating"</strong> (making things up that sound true).</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p1.checklistTitle">✅ Before moving on</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p1.check1">You wrote how the process works today, even if it is still a draft.</li>
+                                <li data-i18n="p1.check2">You read at least one Deep Research report and took notes.</li>
+                                <li data-i18n="p1.check3">You listed the tools and systems involved in the process.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 2 -->
+            <div id="passo-2" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">2</span>
+                    </div>
+                    <div class="prose-custom max-w-none w-full">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p2.title">Sketch your agent workflow</h3>
+                        <p data-i18n-html="p2.body1">With your diagnosis done, pause for a second: do not jump straight into asking AI to build the agent. First, ask it to help you design the <strong>structure</strong> of what you want to build.</p>
+                        <p data-i18n-html="p2.body2">In <strong>Gemini</strong> (or alternatives like <strong>ChatGPT</strong> and <strong>Claude</strong>), paste what you learned in Step 1 and ask for planning support. Planning before execution is more efficient: you can visualize the <strong>"virtual workers"</strong> and the <strong>skills</strong> each one needs, without wasting effort.</p>
+                        <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
+                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copy</button>
+                            <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p2.codeComment">// Ask like this:</p>
+                            <span data-i18n-html="p2.codePrompt">"Based on the topic I described above, help me plan a set of agents. For each one, list the required <strong>skills</strong>, <strong>tools</strong>, and <strong>triggers</strong> (hooks)."</span>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p2.checklistTitle">✅ Before moving on</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p2.check1">For each agent, define what it does, which tools it uses, and when it should start acting.</li>
+                                <li data-i18n="p2.check2">You can explain out loud what each agent is responsible for.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div id="passo-3" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">3</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p3.title">Gather your agent's study material</h3>
+                        <p data-i18n-html="p3.body1">An agent is only smart if it has <strong>high-quality material to study</strong>. This is not surface-level research: now is the time to go deep and collect real manuals, laws, and standards that govern your work.</p>
+
+                        <div class="highlight-box rounded-2xl border border-indigo-100 dark:border-slate-700 shadow-sm mt-6">
+                            <h4 class="font-bold text-indigo-900 dark:text-indigo-200 mb-4 flex items-center gap-2">
+                                <i class="fas fa-microscope" aria-hidden="true"></i> <span data-i18n="p3.howTitle">How to use Gemini Deep Research:</span>
+                            </h4>
+                            <p class="text-sm text-indigo-800 dark:text-indigo-300 mb-4" data-i18n="p3.howBody">Gemini Deep Research works like a private investigator: it spends a few minutes scanning the web and delivers a complete report.</p>
+                            <ul class="space-y-3">
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">1</span>
+                                    <span data-i18n-html="p3.how1">Open <a href="https://gemini.google.com" target="_blank" rel="noopener" class="underline font-bold">Gemini</a> and look for the <strong>"Deep Research"</strong> feature in the chat bar.</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">2</span>
+                                    <span data-i18n="p3.how2">Define the topic based on Step 2 planning (for example: &quot;Investigate all local safety standards for civil construction projects&quot;).</span>
+                                </li>
+                                <li class="flex items-start gap-3 text-sm text-indigo-950 dark:text-indigo-200">
+                                    <span class="bg-white dark:bg-slate-800 w-6 h-6 rounded-full flex items-center justify-center shrink-0 font-bold text-indigo-600 dark:text-indigo-300 shadow-sm">3</span>
+                                    <span data-i18n="p3.how3">Download or copy the final report. It will become your agent's knowledge foundation.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0" data-i18n="p3.alertTitle">🚨 Attention:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2" data-i18n="p3.alertBody">Read every generated report. This is not just fuel for AI. It is also a great opportunity for you to learn and stay current on the topic.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p3.checklistTitle">✅ Before moving on</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p3.check1">All researched material is saved in an easy-to-find folder.</li>
+                                <li data-i18n="p3.check2">You read each report from start to finish and highlighted key points.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4 -->
+            <div id="passo-4" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">4</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p4.title">Your agent's study guide</h3>
+                        <p data-i18n-html="p4.body1">Imagine AI as a brilliant student who has never worked at your company. The <strong>study guide</strong> is the custom learning material you hand over.</p>
+                        <p data-i18n-html="p4.body2">Unlike generic AI, your agent will rely on a source focused on your own data. This content <strong>defines how it behaves</strong>: it replies in your tone, follows your rules, and cites your sources. Without a study guide, answers are vague. With one, the agent behaves like an experienced team member.</p>
+
+                        <div class="grid md:grid-cols-2 gap-6 mt-8">
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-slate-800 dark:text-white mb-2 flex items-center gap-2"><i class="fas fa-brain text-indigo-500" aria-hidden="true"></i> <span data-i18n="p4.whatTitle">What is it?</span></h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n-html="p4.whatBody">It is your agent's <strong>initial knowledge base</strong>. It defines what the agent knows and exactly how it should act.</p>
+                            </div>
+                            <div class="bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                                <h4 class="font-bold text-slate-800 dark:text-white mb-2 flex items-center gap-2"><i class="fas fa-broom text-indigo-500" aria-hidden="true"></i> <span data-i18n="p4.whyMdTitle">Why Markdown (.md)?</span></h4>
+                                <p class="text-sm text-slate-600 dark:text-slate-400 leading-relaxed" data-i18n="p4.whyMdBody">.md files are plain text with lightweight formatting. AI tools read them well, without the visual clutter of PDF or Word files.</p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 bg-indigo-50 dark:bg-slate-900/60 p-6 rounded-2xl">
+                            <p class="font-bold text-indigo-900 dark:text-indigo-200 mb-2 text-sm uppercase tracking-wider" data-i18n="p4.howLabel">How to prepare the study guide:</p>
+                            <ol class="list-decimal ml-6 space-y-2 text-indigo-800 dark:text-indigo-300 text-sm">
+                                <li data-i18n="p4.how1">Create a project folder on your computer.</li>
+                                <li data-i18n-html="p4.how2">Open your research reports in Google Docs and download each one as <strong>"Formatted text (.md)"</strong>.</li>
+                                <li data-i18n="p4.how3">Place those files inside the folder. Done, your study guide is ready.</li>
+                            </ol>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p4.checklistTitle">✅ Before moving on</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p4.check1">Folder created and text files organized inside it.</li>
+                                <li data-i18n="p4.check2">You reviewed the content and removed confidential information.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5 -->
+            <div id="passo-5" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-indigo-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">5</span>
+                    </div>
+                    <div class="prose-custom max-w-none w-full">
+                        <h3 class="text-2xl font-bold text-slate-900 dark:text-white mb-6" data-i18n="p5.title">Your agent's &quot;contract&quot;</h3>
+                        <p data-i18n-html="p5.body1">Now use <a href="https://claude.ai" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Claude</a>, <a href="https://github.com/features/copilot" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">GitHub Copilot</a>, or alternatives like <a href="https://cursor.sh" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">Cursor</a> and <a href="https://chatgpt.com" target="_blank" rel="noopener" class="underline font-bold text-indigo-600 dark:text-indigo-300">ChatGPT</a> (pointing to the study-guide folder created in Step 4). Ask AI to read the material and draft a <strong>contract</strong> for what will be built.</p>
+                        <p data-i18n="p5.body2">The contract is where AI explains, in plain language, exactly what it intends to do. Read it carefully and decide: &quot;yes, this is exactly what I want&quot; or &quot;this rule is wrong, change it&quot;.</p>
+                        <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
+                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copy</button>
+                            <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p5.codeComment">// Ask like this:</p>
+                            <span data-i18n="p5.codePrompt">&quot;Read the files in this folder and create a detailed agent specification in plain language, describing everything it should do, its rules, its tone of voice, and the situations where it must ask for human help.&quot;</span>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 p-6 rounded-2xl mt-8 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0" data-i18n="p5.alertTitle">🚨 Attention:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2" data-i18n="p5.alertBody">Read everything. This is where you prevent AI hallucinations. A well-validated contract leads to a more reliable agent. Talk with AI or edit the text manually until it is exactly right.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p5.checklistTitle">✅ Before moving on</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p5.check1">You read the full contract and understood what is written.</li>
+                                <li data-i18n="p5.check2">The rules and voice are yours, not the AI's.</li>
+                                <li data-i18n="p5.check3">You defined what the agent should do when it does not know the answer.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 6 -->
+            <div id="passo-6" class="step-card scroll-mt-20 bg-white dark:bg-slate-800 p-8 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="shrink-0">
+                        <span class="bg-green-600 text-white text-2xl font-bold w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg">6</span>
+                    </div>
+                    <div class="prose-custom max-w-none">
+                        <h3 class="text-2xl font-bold text-green-700 dark:text-green-400 mb-6" data-i18n="p6.title">Time to bring the agent to life</h3>
+                        <p data-i18n="p6.body1">With the contract approved by you, the hardest part is done. Now give AI the order to &quot;turn the key&quot;.</p>
+                        <div class="bg-stone-100 dark:bg-slate-950 text-slate-700 dark:text-slate-300 p-6 pr-24 rounded-2xl font-mono text-sm mt-6 border border-stone-300 dark:border-slate-800 shadow-sm relative">
+                            <button class="copy-btn copy-btn--abs" type="button" data-i18n="ui.copy">Copy</button>
+                            <p class="text-violet-500 dark:text-slate-400 mb-2 font-bold uppercase tracking-widest text-xs" data-i18n="p6.codeComment">// Ask like this:</p>
+                            <span data-i18n="p6.codePrompt">&quot;The contract is perfect. Now execute the agent development as planned.&quot;</span>
+                        </div>
+                        <p data-i18n="p6.body2">AI will generate the files, code, and instructions needed. Your first agent is now alive and ready to solve the pain you identified at the beginning.</p>
+
+                        <div class="mt-6 bg-slate-50 dark:bg-slate-900/60 p-6 rounded-2xl border border-slate-100 dark:border-slate-700">
+                            <p class="font-bold text-slate-900 dark:text-white mb-3" data-i18n="p6.outputTitle">What you should expect as output:</p>
+                            <ul class="list-disc ml-6 space-y-1 text-sm text-slate-600 dark:text-slate-400">
+                                <li data-i18n="p6.output1">Configuration files and system instructions (system prompt).</li>
+                                <li data-i18n="p6.output2">Folder structure with the study guide ready to use.</li>
+                                <li data-i18n="p6.output3">Example uses and suggested test cases.</li>
+                                <li data-i18n="p6.output4">Instructions for integration with the selected channel (WhatsApp, email, spreadsheet, etc.).</li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-amber-50 dark:bg-amber-950/40 border-2 border-amber-300 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-amber-900 dark:text-amber-200 text-base font-semibold mb-0" data-i18n="p6.alertTitle">🔄 Remember:</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2" data-i18n-html="p6.alertBody1">The agent is born, but it still needs testing and tuning. Treat each run as a cycle: <strong>test -> adjust contract -> run again</strong>.</p>
+                            <p class="text-amber-800 dark:text-amber-300 text-sm mt-2" data-i18n-html="p6.alertBody2">Also watch <strong>privacy</strong>: avoid adding sensitive information to the study guide (contracts, personal data, trade secrets) without confirming how your tool handles that data.</p>
+                        </div>
+
+                        <div class="bg-emerald-50 dark:bg-emerald-950/40 border-2 border-emerald-400 p-6 rounded-2xl mt-6 shadow-sm">
+                            <p class="text-emerald-900 dark:text-emerald-200 font-semibold mb-2" data-i18n="p6.checklistTitle">✅ Congratulations! You built your first agent!</p>
+                            <ul class="text-sm text-emerald-800 dark:text-emerald-300 space-y-1 list-disc ml-5">
+                                <li data-i18n="p6.check1">Your agent is live and responding.</li>
+                                <li data-i18n="p6.check2">You already know when you will review it, and you will not postpone that.</li>
+                                <li data-i18n="p6.check3">Compare the outcome with the original problem: was it worth it?</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Golden Rules Footer -->
+        <footer id="regras" class="mt-16 p-10 bg-indigo-950 text-indigo-100 rounded-[3rem] shadow-2xl overflow-hidden relative scroll-mt-20">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-indigo-900 rounded-full -mr-32 -mt-32 opacity-50" aria-hidden="true"></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl font-bold text-white mb-10 text-center" data-i18n="footer.title">4 reminders to keep in mind</h2>
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="bg-indigo-900/50 border border-indigo-700/40 rounded-2xl p-6 flex flex-col items-center text-center gap-4">
+                        <div class="bg-indigo-600/40 w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white shadow-md border border-indigo-500/30 shrink-0">
+                            <i class="fas fa-user-shield" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2" data-i18n="footer.rule1Title">You are the boss</h3>
+                            <p class="text-sm opacity-80 leading-relaxed" data-i18n="footer.rule1Desc">AI executes, you decide. Read the contract and validate the study guide content. You are in charge.</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-900/50 border border-indigo-700/40 rounded-2xl p-6 flex flex-col items-center text-center gap-4">
+                        <div class="bg-indigo-600/40 w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white shadow-md border border-indigo-500/30 shrink-0">
+                            <i class="fas fa-folder-open" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2" data-i18n="footer.rule2Title">Organization always wins</h3>
+                            <p class="text-sm opacity-80 leading-relaxed" data-i18n="footer.rule2Desc">One organized folder with clean .md files beats a thousand generic prompts. Messy study guide = confused agent.</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-900/50 border border-indigo-700/40 rounded-2xl p-6 flex flex-col items-center text-center gap-4">
+                        <div class="bg-indigo-600/40 w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white shadow-md border border-indigo-500/30 shrink-0">
+                            <i class="fas fa-vial" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2" data-i18n="footer.rule3Title">Do not rush</h3>
+                            <p class="text-sm opacity-80 leading-relaxed" data-i18n="footer.rule3Desc">It does not need to be perfect on the first try. Refine the conversation, request contract adjustments, and try again.</p>
+                        </div>
+                    </div>
+                    <div class="bg-indigo-900/50 border border-indigo-700/40 rounded-2xl p-6 flex flex-col items-center text-center gap-4">
+                        <div class="bg-indigo-600/40 w-14 h-14 rounded-xl flex items-center justify-center text-2xl text-white shadow-md border border-indigo-500/30 shrink-0">
+                            <i class="fas fa-rotate" aria-hidden="true"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg text-white mb-2" data-i18n="footer.rule4Title">Keep coming back to improve</h3>
+                            <p class="text-sm opacity-80 leading-relaxed" data-i18n="footer.rule4Desc">When issues appear, go back to the contract. A good agent is tested and improved over time.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-12 pt-10 border-t border-indigo-800/60">
+                    <div class="bg-indigo-900/40 border border-indigo-700/40 rounded-2xl p-8 shadow-lg">
+                        <p class="text-xs font-bold uppercase tracking-widest text-indigo-400 mb-6 text-center" data-i18n="footer.developedBy">Developed by</p>
+                        <div class="flex flex-col sm:flex-row items-center gap-6">
+                            <a href="https://www.linkedin.com/in/fernandojorge/" target="_blank" rel="noopener" class="shrink-0 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-indigo-900" data-i18n-aria="footer.authorLinkedinAriaLabel" aria-label="Fernando Jorge da Silva profile on LinkedIn" title="Ver perfil no LinkedIn">
+                                <img src="/assets/images/autor.jpg" alt="Foto de Fernando Jorge da Silva" class="w-20 h-20 rounded-full object-cover border-2 border-indigo-400/60 shadow-md hover:border-indigo-300 hover:scale-105 transition-all" loading="lazy">
+                            </a>
+                            <div class="flex-1 text-center sm:text-left">
+                                <h3 class="text-2xl font-bold text-white mb-3">Fernando Jorge da Silva</h3>
+                                <div class="flex flex-wrap justify-center sm:justify-start gap-2 text-sm">
+                                    <a href="https://www.linkedin.com/in/fernandojorge/" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition-colors border border-white/10">
+                                        <i class="fab fa-linkedin-in" aria-hidden="true"></i> LinkedIn
+                                    </a>
+                                    <a href="https://github.com/fjorge9-arch" target="_blank" rel="noopener" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition-colors border border-white/10">
+                                        <i class="fab fa-github" aria-hidden="true"></i> GitHub
+                                    </a>
+                                    <a href="mailto:fjorge9@gmail.com" class="inline-flex items-center gap-2 bg-white/10 hover:bg-white/20 text-white px-3 py-1.5 rounded-full transition-colors border border-white/10">
+                                        <i class="fas fa-envelope" aria-hidden="true"></i> fjorge9@gmail.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-sm opacity-50 text-center mt-8" data-i18n="footer.copyright">© 2026 · Made by Fernando Jorge da Silva. Feel free to share.</p>
+                </div>
+            </div>
+        </footer>
+
+        </main>
+    </div>
+
+    <!-- Back to top -->
+    <div class="fixed bottom-6 inset-x-0 z-40 pointer-events-none">
+        <div class="max-w-7xl mx-auto px-4 flex justify-end">
+            <button id="backToTop" class="pointer-events-auto bg-indigo-600 hover:bg-indigo-700 text-white w-12 h-12 rounded-full shadow-xl flex items-center justify-center" data-i18n-aria="ui.backToTop" aria-label="Back to top">
+                <i class="fas fa-arrow-up" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="/assets/js/i18n.js"></script>
+    <script src="/assets/js/main.js"></script>
+
+</body>
+</html>

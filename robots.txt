@@ -1,3 +1,5 @@
 User-agent: *
 Allow: /
+Allow: /assets/
+
 Sitemap: https://desmistificando-ia.com/sitemap.xml

@@ -4,3 +4,7 @@
 
 # Estudos sem barra final -> com barra (canonical)
 /estudos /estudos/ 301
+
+# Idiomas sem barra final -> com barra (canonical)
+/en /en/ 301
+/es /es/ 301

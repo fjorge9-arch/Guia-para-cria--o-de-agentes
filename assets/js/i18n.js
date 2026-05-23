@@ -883,8 +883,35 @@ function lookupRaw(key) {
   return key.split('.').reduce((obj, k) => obj?.[k], TRANSLATIONS[currentLang]);
 }
 
+// Caminhos canonicos do Guia por idioma. A Plataforma de Estudos (/estudos/)
+// nao tem URLs por idioma: a troca continua sendo client-side.
+const PATH_FOR_LANG = { pt: '/', en: '/en/', es: '/es/' };
+
+function isGuiaPage() {
+  // True na home do Guia (/, /en/, /es/). False em /estudos/ e demais SPAs.
+  const p = window.location.pathname.replace(/\/+$/, '/') || '/';
+  return p === '/' || p === '/en/' || p === '/es/';
+}
+
+function langFromPath() {
+  const p = window.location.pathname;
+  if (p.startsWith('/en/') || p === '/en') return 'en';
+  if (p.startsWith('/es/') || p === '/es') return 'es';
+  if (p === '/' || p.startsWith('/index')) return 'pt';
+  return null;
+}
+
 function setLang(lang) {
   if (!LANGS.includes(lang)) lang = 'pt';
+  // Na home do Guia, idioma == URL. Troca = navegar.
+  if (isGuiaPage()) {
+    const target = PATH_FOR_LANG[lang];
+    if (window.location.pathname !== target) {
+      localStorage.setItem('lang', lang);
+      window.location.href = target + window.location.hash;
+      return;
+    }
+  }
   currentLang = lang;
   localStorage.setItem('lang', lang);
   document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -895,8 +922,13 @@ function setLang(lang) {
 window.setLang = setLang;
 
 function detectLang() {
+  // 1. Path (autoritativo na home do Guia)
+  const fromPath = langFromPath();
+  if (fromPath && isGuiaPage()) return fromPath;
+  // 2. localStorage
   const stored = localStorage.getItem('lang');
   if (stored && LANGS.includes(stored)) return stored;
+  // 3. Navegador
   const browser = (navigator.language || '').toLowerCase().slice(0, 2);
   if (LANGS.includes(browser)) return browser;
   return 'pt';
