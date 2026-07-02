@@ -65,24 +65,17 @@
 
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
   <!-- Dark mode anti-FOUC: must run before any CSS paints -->
-  <script>
-    (function(){
-      var t=localStorage.getItem('theme');
-      if(t==='dark'||(!t&&window.matchMedia('(prefers-color-scheme:dark)').matches))
-        document.documentElement.classList.add('dark');
-    })();
-  </script>
+  <script src="../assets/js/theme-init.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="">
 
-  <!-- Inter: carregamento nao-bloqueante (ja usa font-display=swap no proprio CSS) -->
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet"></noscript>
-
-  <!-- Font Awesome: carregamento nao-bloqueante -->
-  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
-  <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></noscript>
+  <!-- Inter + Font Awesome: carregamento nao-bloqueante -->
+  <script src="../assets/js/preload-swap.js" data-css="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap,https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"></script>
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  </noscript>
 
   <!-- styles.css: preload hint (inicia download cedo) + link sincrono (sem FOUC/CLS no desktop) -->
   <link rel="preload" as="style" href="../assets/css/styles.css">

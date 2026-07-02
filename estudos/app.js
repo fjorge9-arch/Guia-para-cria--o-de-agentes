@@ -175,19 +175,28 @@ function resetProgress() {
   render();
 }
 
-// ── Lazy-load marked.js (only when a lesson is opened) ────────────
-let _markedPromise = null;
-function ensureMarked() {
-  if (typeof marked !== 'undefined') return Promise.resolve();
-  if (_markedPromise) return _markedPromise;
-  _markedPromise = new Promise((resolve, reject) => {
+// ── Lazy-load marked.js + DOMPurify (only when a lesson is opened) ─
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
     const s = document.createElement('script');
-    s.src = '/assets/js/vendor/marked.min.js';
+    s.src = src;
     s.defer = true;
     s.onload = () => resolve();
-    s.onerror = () => { _markedPromise = null; reject(new Error('marked load failed')); };
+    s.onerror = () => reject(new Error(`failed to load ${src}`));
     document.head.appendChild(s);
   });
+}
+
+let _markedPromise = null;
+function ensureMarked() {
+  const needsMarked = typeof marked === 'undefined';
+  const needsPurify = typeof DOMPurify === 'undefined';
+  if (!needsMarked && !needsPurify) return Promise.resolve();
+  if (_markedPromise) return _markedPromise;
+  _markedPromise = Promise.all([
+    needsMarked ? loadScript('/assets/js/vendor/marked.min.js') : Promise.resolve(),
+    needsPurify ? loadScript('/assets/js/vendor/purify.min.js') : Promise.resolve()
+  ]).catch(err => { _markedPromise = null; throw err; });
   return _markedPromise;
 }
 
@@ -316,8 +325,8 @@ function renderLicoes() {
     } else if (cached === null) {
       contentHtml = `<div class="lesson-load-error"><i class="fas fa-triangle-exclamation"></i> ${t('licoes.loadError')}</div>`;
     } else {
-      const rendered = typeof marked !== 'undefined'
-        ? marked.parse(cached)
+      const rendered = (typeof marked !== 'undefined' && typeof DOMPurify !== 'undefined')
+        ? DOMPurify.sanitize(marked.parse(cached))
         : `<pre>${escapeHtml(cached)}</pre>`;
       contentHtml = `<div class="lesson-prose">${rendered}</div>`;
     }

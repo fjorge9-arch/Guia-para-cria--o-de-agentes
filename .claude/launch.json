@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-server",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "serve", ".", "-l", "8123"],
+      "port": 8123
+    },
+    {
+      "name": "pages-dev",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["--yes", "wrangler", "pages", "dev", ".", "--port", "8124", "--compatibility-date", "2025-01-01"],
+      "port": 8124
+    }
+  ]
+}

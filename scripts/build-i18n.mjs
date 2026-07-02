@@ -5,6 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { createContext, Script } from 'node:vm';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -35,8 +36,11 @@ function extractTranslations(src) {
     else if (c === '}') { depth--; if (depth === 0) { end = i + 1; break; } }
   }
   if (end < 0) throw new Error('Nao consegui delimitar o objeto TRANSLATIONS');
-  // eslint-disable-next-line no-eval
-  return eval('(' + src.slice(objStart, end) + ')');
+  // Avalia o literal num contexto V8 isolado (sem process/require/fs) em vez de eval/Function,
+  // para que codigo injetado em i18n.js nao consiga escapar para o sistema durante o build.
+  const sandbox = createContext(Object.create(null));
+  const script = new Script('(' + src.slice(objStart, end) + ')');
+  return script.runInContext(sandbox, { timeout: 2000 });
 }
 
 function lookup(translations, key) {

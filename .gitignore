@@ -24,3 +24,10 @@ node_modules/
 
 # CSS gerado pelo Tailwind (reconstruído no build)
 assets/css/output.css
+
+# Cache local do wrangler pages dev
+.wrangler/
+
+# Copias acidentais de C:\Temp (ja aconteceu uma vez, ver historico)
+*Tempgithub_*
+*Templocal_*
